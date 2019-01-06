@@ -1,0 +1,66 @@
+<style lang="less">
+
+</style>
+<template>
+  <view>
+字体管理
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '字体管理'
+    }
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {
+      items: [
+        { name: '0', value: '系统默认', checked: 'true' },
+        { name: '1', value: '简体中文' },
+        { name: '2', value: '簡體中文' },
+        { name: '3', value: 'English' }
+      ]
+    }
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {
+       radioChange: function (e) {
+        console.log('radio发生change事件，携带value值为：', e.detail.value)
+      },
+    }
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad(options) {}
+  }
+</script>

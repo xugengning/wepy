@@ -1,0 +1,488 @@
+<style lang="less">
+  /* pages/index/index.wxss */
+.swiper {
+  width: 100%;
+}
+
+.direction {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 30rpx 0;
+}
+
+.direction .icon {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.recent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 68rpx;
+  line-height: 68rpx;
+  background-color: #F2F2F2;
+  padding-left: 32rpx;
+  border-top: 1rpx solid #f1f1f1;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+.recent .recent-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.recent .recent-right .listChoose {
+  padding: 0 32rpx 0 25rpx;
+}
+
+.recent .recent-right .listChooseBgc {
+  background-color: #ccc;
+}
+
+.recent .recent-right .search {
+  padding-right: 25rpx;
+}
+.recent .recent-right .icon {
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+  line-height: 1.4rem;
+  padding: 0 10rpx;
+}
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 140rpx;
+  padding: 34rpx 0 0 32rpx;
+}
+.list .pic {
+  width: 20%;
+  padding-bottom: 30rpx;
+  margin-right: 20rpx;
+}
+.list .text {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #ccc;
+  padding-bottom: 30rpx;
+}
+.list .text .icon {
+  display: flex;
+  margin-right: 32rpx;
+  align-items: center;
+}
+
+.list .text .icon .check {
+  display: block;
+}
+
+.list .text .icon .circle {
+  display: block;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  border: 1rpx solid #ccc;
+}
+
+.list .text .time {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+  color: #666;
+}
+
+.list .text .size {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.tabs {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  z-index: 1001;
+}
+
+.tabs text {
+  font-size: 20rpx;
+}
+
+.tabs .delete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs .icon {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+}
+
+.tip {
+  text-align: center;
+}
+
+.tip text {
+  font-size: 28rpx;
+}
+
+.block {
+  width: 50%;
+  float: left;
+  height: 428rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  position: relative;
+  padding: 0 15rpx;
+}
+
+.block .pic {
+  padding: 20rpx;
+  height: 292rpx;
+  background-color: #F2F2F2;
+}
+
+.block .text .time {
+  font-size: 24rpx;
+  float: left;
+  color: #666;
+}
+
+.block .text .size {
+  font-size: 24rpx;
+  padding: 0 10rpx;
+  float: right;
+  color: #666;
+  background-color: #F2F2F2;
+}
+
+.block .text .icon {
+  position: absolute;
+  top: 30rpx;
+  left: 40rpx;
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.block .text .icon .circle {
+  display:block;
+  width:36rpx;
+  height:36rpx;
+  border-radius:50%;
+  border:1rpx solid #ccc;
+}
+
+</style>
+<template>
+  <!--pages/index/index.wxml-->
+<view>
+  <!--轮播-->
+  <swiper class='swiper' indicator-dots indicator-active-color="#FFF" autoplay>
+    <swiper-item>
+        <image src="/images/scroll.png"></image>
+    </swiper-item>
+    <swiper-item>
+        <image src="/images/response.png"></image>
+    </swiper-item>
+    <swiper-item>
+        <image src="/images/background.png"></image>
+    </swiper-item>
+  </swiper>
+
+  <!--中间按钮-->
+  <view class='direction'>
+    <navigator url="/pages/teach" class="teacher">
+      <image src="/images/@2x/home_icon_course@2x.png" class='icon'></image>
+      <text>教程</text>
+    </navigator>
+
+    <view @tap="test"  @tap="test">
+      <image src="/images/@2x/home_icon_question@2x.png" class='icon'></image>
+      <text>问答</text>
+    </view>
+  </view>
+
+  <!--最近-->
+  <view class="recent">
+    <text>最近使用</text>
+    <view class="recent-right">
+      <view class="search">
+        <icon type="search" size="14" color="#000"  class='icon'/>
+        <text>搜索</text>
+      </view>
+      <view class="listChoose {{isList ? 'listChooseBgc' : ''}}" @tap="changeList">
+        <image src="{{isList ? '/images/@2x/home_icon_list@2x.png' : '/images/@2x/home_icon_paved@2x.png'}}" class='icon'></image>
+        <text>列表</text>
+      </view>
+    </view>
+  </view>
+
+  <!--列表-->
+  <scroll-view>
+    <block wx:for="{{listData}}" wx:key="*this">
+      <view class="{{isList ? 'list' : 'block' }}" @tap="choose" id="{{index}}" data-item="{{item}}">
+        <view class='pic'>
+          <image src="/images/scroll.png"></image>
+        </view>
+        <view class="text">
+          <view>
+            <view class="title">
+              <text>{{item.name}}</text>
+            </view>
+            <view class='bottom'>
+              <text class="time">{{item.add_time}}</text>
+              <text class="size">{{item.fileSize}}</text>
+            </view>
+          </view>
+          <view class='icon'>
+            <icon wx:if="{{item.isChoose}}" type="success" size="20" color="#0497FF" class='check' />
+            <text wx:else class='circle'></text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class='tabs' wx:if="{{chooseNum.length}}">
+    <view class='delete' @tap="delete">
+      <image src="/images/@2x/edit_icon_database_delete@2x.png" class='icon'></image>
+      <text>删除</text>
+    </view>
+    <view class='delete' @tap="rename">
+      <image src="/images/@2x/tabbar_icon_rename_default@2x.png" class='icon'></image>
+      <text>重命名</text>
+    </view>
+    <view class='delete' @tap="chooseAll">
+      <image src="/images/@2x/tabbar_icon_home_totalselection_default@2x.png" class='icon'></image>
+      <text>{{chooseNum.length == listData.length ? '全不选' : '全选'}}</text>
+    </view>
+  </view>
+
+  <modal wx:if="{{hiddenmodalput}}" title="重命名" confirm-text="保存" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+    <view class='tip'>
+      <text>输入标签名称</text>
+    </view>
+    <input type='text' placeholder="请输入内容" value='{{name}}' bindinput="getName" auto-focus/>
+  </modal>
+</view>
+
+</template>
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import { INCREMENT, DECREMENT } from '../store/types/counter'
+  import { asyncInc } from '../store/actions'
+  import util from '../utils/util.js'
+
+  @connect({
+    stateNum (state) {
+      return state.counter.num
+    },
+    asyncNum (state) {
+      return state.counter.asyncNum
+    }
+  }, {
+    incNum: INCREMENT,
+    decNum: DECREMENT,
+    asyncInc
+  })
+
+  export default class Counter extends wepy.component {
+    props = {
+      num: {
+        type: [Number, String],
+        coerce: function (v) {
+          return +v
+        },
+        default: 50
+      }
+    }
+
+    data = {
+      listData: [],
+      chooseNum: [],
+      hiddenmodalput: false,
+      name: '',
+      isList: true,
+      src: ''
+    }
+    events = {
+      'index-broadcast': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    watch = {
+      num (curVal, oldVal) {
+        console.log(`旧值：${oldVal}，新值：${curVal}`)
+      }
+    }
+
+    methods = {
+      toTeach(){
+        this.$navigate('./teach')
+      },
+      test(){
+      var that = this
+      wx.chooseImage({
+        count: 1, // 默认9
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          console.log(res)
+          var tempFilePaths = res.tempFilePaths
+        },
+        fail(res){
+          console.log(res)
+        }
+      })
+    },
+      changeList(){
+        this.setData({
+          isList: !this.data.isList
+        })
+      },
+
+      getDataList(_this){
+        util.request('http://47.106.192.126:8009/api/MyDlabelTemplate/', {
+          data: {
+            format: "json"
+          }
+        }).then((res) => {
+          console.log(res)
+          const resData = res.data.results
+          if (resData && resData.length) {
+            resData.forEach((item) => {
+              item.add_time = util.formatTime(new Date(item.add_time))
+            })
+          }
+          console.log(_this);
+
+          _this.listData = resData
+          _this.chooseNum = []
+
+          _this.$apply()
+        })
+      },
+      choose: function( e ) {
+        var index = e.currentTarget.id;
+
+        this.data.listData[index].isChoose = !this.data.listData[index].isChoose
+        var chooseNum = this.data.listData.filter((item) => item.isChoose)
+        var that = this;
+
+        if (chooseNum.length) {
+          this.$emit('hiddenTab')
+          that.listData = that.data.listData
+          that.chooseNum = chooseNum
+        } else {
+          that.listData = that.data.listData
+          that.chooseNum = chooseNum
+
+          this.$emit('showTab')
+        }
+
+      },
+      delete() {
+        const chooseNum = this.data.chooseNum;
+        const that = this;
+        wx.showModal({
+          title: "删除标签",
+          content: "删除后无法恢复",
+          confirmText: "确认删除",
+          success() {
+            chooseNum.forEach((item, index) => {
+              util.request(`http://47.106.192.126/api/MyDlabelTemplate/${item.id}`, {
+                method: "DELETE"
+              }).then(() => {
+                if (index == chooseNum.length - 1) {
+                  that.getDataList()
+                }
+              })
+            })
+          }
+        })
+      },
+      rename() {
+        console.log(this.data)
+        this.hiddenmodalput = !this.hiddenmodalput
+        this.name = this.chooseNum[0].name
+      },
+      //取消按钮
+      cancel() {
+        this.hiddenmodalput = false
+      },
+      //确认
+      confirm(e) {
+        const chooseNum = this.data.chooseNum;
+        const that = this;
+        chooseNum.forEach((item, index) => {
+          util.request(`http://47.106.192.126/api/MyDlabelTemplate/${item.id}/`, {
+            method: "PUT",
+            data: {
+              name: this.data.name,
+              fileCategory: item.fileCategory
+            }
+          }).then((res) => {
+            if (index == chooseNum.length - 1) {
+              that.getDataList()
+              this.hiddenmodalput = false
+              this.name = ''
+            }
+          })
+        })
+      },
+
+      getName: function (e) {
+        this.name = e.detail.value
+      },
+
+      chooseAll() {
+        const chooseNum = this.data.chooseNum
+        const listData = this.data.listData
+        if (chooseNum.length == listData.length) {
+          listData.forEach((item) => {
+            item.isChoose = false
+          })
+
+          this.listData = listData
+          this.chooseNum = []
+
+          this.$emit('showTab')
+
+          return;
+
+        }
+
+        listData.forEach((item) => {
+          item.isChoose = true
+        })
+
+        this.listData = listData
+        this.chooseNum = this.data.listData.filter((item) => item.isChoose)
+      }
+    }
+
+    onLoad () {
+      this.methods.getDataList(this)
+    }
+  }
+
+
+</script>

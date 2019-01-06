@@ -1,0 +1,109 @@
+<style lang="less">
+ .private {
+  padding: 0 40rpx;
+}
+
+.h1 {
+  font-size: 40rpx;
+  font-weight: bold;
+  text-align: center;
+  margin: 40rpx 0;
+}
+
+.title {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+}
+
+.text {
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+</style>
+<template>
+  <view class='private'>
+<view class='title'>1.软件</view>
+
+<view class='text'>1.1本软件不含有任何旨在破坏用户计算机数据和获取用户隐私信息的恶意代码，不含有任何跟踪、监视用户计算机的功能代码，不会监控用户网上、网下的行为，不会收集用户使用其它软件、文档等个人信息，不会泄漏用户隐私。</view>
+
+<view class='text'>1.2对于从非度点指定站点下载的本软件产品以及从非度点发行的介质上获得的本软件产品， 度点无法保证该软件是否感染计算机病毒、是否隐藏有伪装的“特洛伊木马”程序或者黑客软件，使用此类软件，将可能导致不可预测的风险，建议用户不要轻易下载、安装、使用， 度点不承担任何由此产生的一切法律责任。</view>
+
+<view class='text'>1.3本软件同大多数互联网软件一样，受包括但不限于用户原因、网络服务质量、社会环境等因素的差异影响，可能受到各种安全问题的侵扰，如他人利用用户的资料，造成现实生活中的骚扰；用户下载安装的其它软件或访问的其他网站中含有“特洛伊木马”等病毒，威胁到用户的设备信息和数据的安全，继而影响本“软件”的正常使用等等。用户应加强信息安全及使用者资料的保护意识，要注意加强密码保护，以免遭致损失和骚扰。</view>
+
+<view class='text'>1.4非经度点授权开发并正式发布的其它任何由本软件衍生的软件均属非法，下载、安装、使用此类软件，将可能导致不可预知的风险，由此产生的一切法律责任与纠纷一概与公司无关。建议用户不要轻易下载、安装、使用此类软件，否则引起的一切法律责任纠纷一概与度点无关。 </view>
+
+<view class='title'>2.免责与责任限制</view>
+
+<view class='text'>2.1用户确认，其知悉本软件所有功能及度点为实现本软件各功能所进行的必要操作，其根据自身需求自愿选择使用本软件及相关服务，因使用本软件及相关服务所存在的风险和一切后果将完全由其自己承担，度点不承担任何责任。</view>
+
+<view class='text'>2.2 本软件经过详细的测试，但不能保证与所有的软硬件系统完全兼容，不能保证本软件完全没有错误。如果出现不兼容及软件错误的情况，用户可拨打技术支持电话将情况报告度点，获得技术支持。如果无法解决兼容性问题，用户可以删除本软件。</view>
+
+<view class='text'>2.3使用本软件由用户自己承担风险，公司及合作单位对本软件不作任何类型的担保，不论是明示的、默示的或法令的保证和条件，包括但不限于本软件的适销性、适用性、无病毒、无疏忽或无技术瑕疵问题、所有权和无侵权的明示或默示担保和条件，对在任何情况下因使用或不能使用本软件所产生的直接、间接、偶然、特殊及后续的损害及风险，度点不承担任何责任。</view>
+
+<view class='text'>2.4 在适用法律允许的最大范围内，对因使用或不能使用本软件所产生的损害及风险，包括但不限于直接或间接的个人损害、商业赢利的丧失、贸易中断、商业信息的丢失或任何其它经济损失， 度点不承担任何责任。</view>
+
+<view class='text'>2.5 使用本软件涉及到互联网服务，可能会受到各个环节不稳定因素的影响，存在因不可抗力、计算机病毒、黑客攻击、系统不稳定、用户所在位置、用户关机，非法内容信息、骚扰信息屏蔽以及其他任何网络、技术、通信线路、信息安全管理措施等原因造成的用户的经济损失，度点不承担任何责任。</view>
+
+<view class='text'>2.6 对于因电信系统或互联网网络故障、计算机故障或病毒、信息损坏或丢失、计算机系统问题或其它任何不可抗力原因而产生损失，度点不承担任何责任。</view>
+
+<view class='text'>2.7 用户违反本协议规定， 度点有权采取包括但不限于中断使用许可、停止提供服务、限制使用、法律追究等措施。</view>
+
+<view class='title'>3 其他条款</view>
+
+<view class='text'>3.1 本《协议》所定的任何条款的部分或全部无效者，不影响其它条款的效力。</view>
+
+<view class='text'>3.2度点有权随时根据有关法律、法规的变化以及公司经营状况和经营策略的调整等修改本协议。修改后的协议会附于新版本软件。当发生有关争议时，以最新的协议文本为准。如果不同意改动的内容，用户可以自行删除本软件。如果用户继续使用本软件，则视为您接受本协议的变动。</view>
+
+<view class='text'>3.3本《协议》版权由公司所有，公司保留一切解释权利。本文中提及的软件和服务名称有可能为公司的注册商标或商标，受法律保护。</view>
+
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '隐私政策'
+    }
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {}
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {}
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad(options) {}
+  }
+</script>

@@ -1,0 +1,522 @@
+<style lang="less">
+  .my {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #f2f2f2;
+}
+
+.my .top {
+  height: 220rpx;
+  position: relative;
+}
+
+.my .top .top-left {
+  position: absolute;
+  left: 32rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.my .top .top-left .img {
+  width: 130rpx;
+  height: 130rpx;
+  border: 2rpx solid #82cbff;
+  border-radius: 50%;
+}
+
+.my .top .top-left .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 36rpx;
+  color: #F2F2F2;
+}
+
+.my .top .top-left .text .tip {
+  font-size: 20rpx;
+}
+
+.my .top .top-right {
+  height: 100%;
+  position: absolute;
+  right: 32rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.my .top .top-right .img{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.my .top .top-right .img image{
+  width: 48rpx;
+  height: 48rpx;
+  margin-left: 50rpx;
+}
+
+.my .top .top-right .text {
+  color: #F2F2F2;
+  text-align: right;
+}
+
+.my .top .top-right .text text {
+  font-size: 24rpx;
+}
+
+.my .top .top-right .text image {
+  width: 36rpx;
+  height: 36rpx;
+  vertical-align: middle;
+  transform: rotate(180deg)
+}
+
+.label {
+  height: 98rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+
+.label .text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.label .number {
+  font-size: 36rpx;
+  color: #0497ff;
+}
+
+.label .left {
+  border-right: 1rpx solid #f2f2f2;
+  width: 50%;
+  text-align: center;
+}
+
+.label .right {
+  width: 50%;
+  border-left: 1rpx solid #f2f2f2;
+  text-align: center;
+}
+
+.soft {
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+}
+
+.soft .title {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 2rpx solid #ccc;
+  width: 100%;
+  padding: 0 32rpx;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.soft .title .right text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.soft .title .right image {
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+}
+
+.soft .content {
+  display: flex;
+  justify-content: space-around;
+  height: 168rpx;
+}
+
+.soft .content .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.soft .content image {
+  height: 60rpx;
+  width: 60rpx;
+  margin-bottom: 20rpx;
+}
+
+.soft .content .item text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.pic image{
+  width: 100%;
+  height: 220rpx;
+}
+
+.response {
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.response .title {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 2rpx solid #ccc;
+  width: 100%;
+  padding: 0 32rpx;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.response .content {
+  display: flex;
+  justify-content: flex-start;
+  padding: 32rpx;
+}
+
+.response .content .img image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.response .content .right {
+  margin-left: 32rpx;
+}
+
+.response .content .right .name {
+  color: #333;
+}
+
+.response .content .right .name .date {
+  color: #ccc;
+  margin-left: 32rpx;
+}
+
+.response .content .right .word text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.response .content .right .bottom {
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.response .content .right .bottom text{
+  font-size: 28rpx;
+  color: #ccc;
+}
+
+.response .content .right .bottom .answer {
+  display: block;
+  border: 2rpx solid #ccc;
+  border-radius: 25rpx;
+  text-align: center;
+  padding: 0 20rpx;
+  margin-left: 20rpx;
+}
+
+.getMore {
+  height: 108rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 108rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.DLabel {
+  height: 108rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 0 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.DLabel image {
+  height: 40rpx;
+  width: 40rpx;
+}
+
+.footer {
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.night {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.4;
+}
+
+.modal {
+  position: fixed;
+  width: 540rpx;
+  height: 330rpx;
+  background-color: #fff;
+  top: 300rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.8;
+  border-radius: 26rpx;
+}
+
+.modal .title {
+  font-size: 36rpx;
+  text-align: center;
+  color: #333;
+  margin: 40rpx auto;
+}
+
+.modal .share {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.modal .share .wechat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid transparent;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+button::after {
+  border: none;
+}
+
+.modal .share .img {
+  width: 96rpx;
+  height: 96rpx;
+}
+
+.modal .share .name {
+  font-size: 24rpx;
+  color: #101010;
+  margin-top: 10rpx;
+}
+</style>
+
+<template>
+ <view class="my">
+  <image class='top' src='/images/background.png'>
+    <view class='top-left'>
+      <image class="img" src='/images/111.jpg'></image>
+      <view class='text'>
+        <text>Miss-Z</text>
+        <text class='tip'>高级用户未激活</text>
+      </view>
+    </view>
+    <view class='top-right'>
+      <view class='img'>
+        <navigator url='/pages/personal'>
+          <image src='/images/@2x/nav_icon_mine_personaldata@2x.png'></image>
+        </navigator>
+        <image src='/images/@2x/nav_icon_mine_news@2x.png'></image>
+      </view>
+      <view class='text'>
+        <text>点击查看特权</text>
+        <image src='/images/@2x/nav_icon_return@2x.png'></image>
+      </view>
+    </view>
+  </image>
+  <view class='label'>
+    <view class='left'>
+      <text class='text'>Label：</text>
+      <text class='number'>1234</text>
+    </view>
+    <view class='right'>
+      <text class='text'>购物分：</text>
+      <text class='number'>9999</text>
+    </view>
+  </view>
+  <view class='soft'>
+    <view class='title'>
+      <text>软件服务</text>
+    </view>
+    <view class='content'>
+      <navigator class='item' url='/pages/teach?id=1'>
+        <image src='/images/@2x/mine_icon_share@2x.png'></image>
+        <text>使用手册</text>
+      </navigator>
+      <navigator class='item' url='/pages/teach?id=2'>
+        <image src='/images/@2x/mine_icon_share@2x.png'></image>
+        <text>视频教程</text>
+      </navigator>
+      <view class='item'>
+        <image src='/images/@2x/mine_icon_printrecord@2x.png'></image>
+        <text>打印记录</text>
+      </view>
+      <view class='item' catchtap='tapAdd'>
+        <image src='/images/@2x/mine_icon_share@2x.png'></image>
+        <text>分享应用</text>
+      </view>
+    </view>
+  </view>
+  <view class='soft'>
+    <view class='title'>
+      <text>我的商场</text>
+      <view class='right'>
+        <text>进入商场</text>
+        <image src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+    <view class='content'>
+      <view class='item'>
+        <image src='/images/@2x/mine_icon_share@2x.png'></image>
+        <text>使用手册</text>
+      </view>
+      <view class='item'>
+        <image src='/images/@2x/mine_icon_share@2x.png'></image>
+        <text>视频教程</text>
+      </view>
+      <view class='item'>
+        <image src='/images/@2x/mine_icon_printrecord@2x.png'></image>
+        <text>打印记录</text>
+      </view>
+      <view class='item'>
+        <image src='/images/@2x/mine_icon_share@2x.png'></image>
+        <text>分享应用</text>
+      </view>
+    </view>
+  </view>
+  <view class='pic'>
+    <image src='/images/scroll.png'></image>
+  </view>
+  <view class='response'>
+    <view class='title'>
+      <text>问答动态</text>
+    </view>
+    <view class='content'>
+      <view class='img'>
+        <image src='/images/@2x/mine_icon_user_about@2x.png'></image>
+      </view>
+      <view class='right'>
+        <view class='name'>
+          <text>Miss-Liu</text>
+          <text class='date'>5月1日</text>
+        </view>
+        <view class='content-title'>
+          <text>为什么使用android9.0</text>
+        </view>
+        <view class='word'>
+          <text>条码打印机条码打印机条码打印机条码打印机条码打印机条码打印机条码打印机条码打印机条码打印机条码打印机条码打印机</text>
+        </view>
+        <view class='bottom'>
+          <text>共18条回复</text>
+          <text class='answer'>我来回答</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='getMore'>查看更多</view>
+  <navigator class='DLabel' url='/pages/aboutDLabel'>
+    <text>关于DLabel</text>
+    <image src='/images/@2x/attribute_rightarrow@2x.png'></image>
+  </navigator>
+  <view class='footer'>到底了</view>
+  <view wx:if='{{translate}}'>
+    <view class='night' @tap="tapAdd"></view>
+    <view class='modal'>
+      <view class='title'>推荐给朋友</view>
+      <view class='share'>
+        <button class='wechat' open-type="share">
+          <image class='img' src='/images/@2x/share_icon_wechat@2x.png'></image>
+          <view class='name'>微信好友</view>
+        </button>
+        <button class='wechat' open-type="share">
+          <image class='img' src='/images/@2x/share_icon_friends@2x.png'></image>
+          <view class='name'>朋友圈</view>
+        </button>
+        <button class='wechat' open-type="share">
+          <image class='img' src='/images/@2x/share_icon_qq@2x.png'></image>
+          <view class='name'>QQ好友</view>
+        </button>
+      </view>
+    </view>
+  </view>
+</view>
+
+</template>
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import { INCREMENT, DECREMENT } from '../store/types/counter'
+  import { asyncInc } from '../store/actions'
+  import util from '../utils/util.js'
+
+  @connect({
+    stateNum (state) {
+      return state.counter.num
+    },
+    asyncNum (state) {
+      return state.counter.asyncNum
+    }
+  }, {
+    incNum: INCREMENT,
+    decNum: DECREMENT,
+    asyncInc
+  })
+
+  export default class Counter extends wepy.component {
+
+    data = {
+      translate: false
+    }
+
+    events = {
+      'index-broadcast': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    methods = {
+      tapAdd() {
+        this.setData({
+          translate: !this.data.translate
+        })
+      }
+    }
+  }
+</script>

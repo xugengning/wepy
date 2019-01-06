@@ -1,0 +1,15 @@
+{
+	"description": "dlabel",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wxae534c1e5b69b500",
+	"projectname": "dlabel",
+	"miniprogramRoot": "dist/",
+	"condition": {}
+}

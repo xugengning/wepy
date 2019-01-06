@@ -1,0 +1,137 @@
+<style lang="less">
+.top {
+  font-size: 36rpx;
+  padding: 40rpx 20rpx;
+  border-bottom: 1rpx solid #f7f7f7;
+}
+
+.top text {
+  color: #101010;
+}
+
+.items {
+  padding: 0 20rpx;
+}
+
+.items .item {
+  margin: 20rpx 0;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.items .item .title {
+  color: #101010;
+  margin-bottom: 20rpx;
+}
+
+.items .item .content {
+  color: #101010;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.items .item .img {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items .item .img image {
+  width: 344rpx;
+  height: 612rpx;
+}
+</style>
+<template>
+  <view class='introduce'>
+  <view class='top'>
+    <text>Dlabel新功能介绍</text>
+  </view>
+  <view class='items'>
+    <view class='item'>
+      <text class='title'>编辑页面</text>
+      <text class='content'>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
+-- 阿尔伯特·爱因斯坦</text>
+      <view class='img'>
+        <image src='/images/introduce.png'></image>
+        <image src='/images/introduce.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='title'>标签页面</text>
+      <text class='content'>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
+-- 阿尔伯特·爱因斯坦</text>
+      <view class='img'>
+        <image src='/images/introduce.png'></image>
+        <image src='/images/introduce.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='title'>设置页面</text>
+      <text class='content'>如果你无法简洁的表达你的想法，那只说明你还不够了解它。
+-- 阿尔伯特·爱因斯坦</text>
+      <view class='img'>
+        <image src='/images/introduce.png'></image>
+        <image src='/images/introduce.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '新功能介绍'
+    }
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {
+      items: [
+        { name: '0', value: '系统默认', checked: 'true' },
+        { name: '1', value: '简体中文' },
+        { name: '2', value: '簡體中文' },
+        { name: '3', value: 'English' }
+      ]
+    }
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {
+       radioChange: function (e) {
+        console.log('radio发生change事件，携带value值为：', e.detail.value)
+      },
+    }
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad(options) {}
+  }
+</script>

@@ -1,0 +1,253 @@
+<style lang="less">
+  .tabs {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  z-index: 1000;
+}
+
+.tabs text {
+  font-size: 20rpx;
+}
+
+.tabs .delete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs .icon {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+}
+
+.middle {
+  position: absolute;
+  top: -20rpx;
+  transform: translateX(-50%);
+  left: 50%;
+  width: 96rpx;
+  height: 96rpx;
+  border: 10rpx solid #000;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.rotate45 {
+  transition: all 0.5s;
+  transform: rotate(45deg);
+}
+
+.night {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.4;
+}
+
+.night-left {
+  position: fixed;
+  bottom: 140rpx;
+  right: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+.night-left image {
+  width: 88rpx;
+  height: 88rpx;
+}
+
+.night-left text {
+  color: #fff;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.night-right {
+  position: fixed;
+  bottom: 140rpx;
+  left: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+.night-right image {
+  width: 88rpx;
+  height: 88rpx;
+}
+
+.night-right text {
+  color: #fff;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+</style>
+<template>
+  <!-- tabs -->
+<view class='tabs' wx:if="{{tabHidden}}">
+  <block wx:for="{{list}}" wx:key="*this">
+    <view class='delete' @tap="changeTabs" data-id='{{index}}'>
+      <image wx:if="{{item.activeTab}}" src="{{item.selectedIconPath}}" class='icon'></image>
+      <image wx:else src="{{item.iconPath}}" class='icon'></image>
+      <text>{{item.text}}</text>
+    </view>
+  </block>
+  <view class='middle' @tap="tapAdd">
+    <image class="{{translate ? 'rotate45' : ''}}" src="/images/@2x/mine_icon_new@2x.png"></image>
+  </view>
+</view>
+
+<!-- 组件切换 -->
+<view style="margin-bottom:120rpx;">
+  <home wx:if="{{currentTab == '0'}}" bindhiddenTab="hiddenTab" bindshowTab="showTab" data-isScroll="{{translate}}"></home>
+  <tip wx:elif="{{currentTab == '1'}}" bindhiddenTab="hiddenTab" bindshowTab="showTab" data-isScroll="{{translate}}"></tip>
+  <setting wx:elif="{{currentTab == '3'}}" bindhiddenTab="hiddenTab" bindshowTab="showTab" data-isScroll="{{translate}}"></setting>
+  <my wx:elif="{{currentTab == '4'}}" bindhiddenTab="hiddenTab" bindshowTab="showTab" data-isScroll="{{translate}}"></my>
+</view>
+<view wx:if='{{translate}}'>
+  <view class='night' @tap="tapAdd"></view>
+  <navigator class='night-left' @tap="add" url='/pages/edit'>
+    <image src="/images/@2x/home_icon_newlabel@2x.png"></image>
+    <text>新建文件</text>
+  </navigator>
+  <navigator class='night-right' @tap="print" url='/pages/fastPrint'>
+    <image src="/images/@2x/home_icon_fastprinting@2x.png"></image>
+    <text>快速打印</text>
+  </navigator>
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+  import home from '../components/home'
+  import tip from '../components/tip'
+  import setting from '../components/setting'
+  import my from '../components/my'
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '首页'
+    }
+    components = {
+      home,
+      tip,
+      setting,
+      my,
+    }
+
+    mixins = [testMixin]
+
+    data = {
+      "list": [
+      {
+        "pagePath": "/pages/index",
+        "text": "首页",
+        "iconPath": "/images/@2x/tabbar_icon_home_default@2x.png",
+        "selectedIconPath": "/images/@2x/tabbar_icon_home_selected@2x.png",
+        "activeTab": true
+      },
+      {
+        "pagePath": "/pages/my",
+        "text": "标签",
+        "iconPath": "/images/@2x/tabbar_icon_label_default@2x.png",
+        "selectedIconPath": "/images/@2x/tabbar_icon_label_selected@2x.png",
+        "activeTab": false
+      },
+      {
+        "pagePath": "/pages/my"
+      },
+      {
+        "pagePath": "/pages/setting",
+        "text": "设置",
+        "iconPath": "/images/@2x/tabbar_icon_settings_default@2x.png",
+        "selectedIconPath": "/images/@2x/tabbar_icon_settings_selected@2x.png",
+        "activeTab": false
+      },
+      {
+        "pagePath": "/pages/tip",
+        "text": "我的",
+        "iconPath": "/images/@2x/tabbar_icon_mine_default@2x.png",
+        "selectedIconPath": "/images/@2x/tabbar_icon_mine_selected@2x.png",
+        "activeTab": false
+      }
+    ],
+      currentTab: "0",
+      tabHidden: true,
+      translate: false
+    }
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      hiddenTab() {
+        this.tabHidden = false
+      },
+      showTab() {
+        this.tabHidden = true
+      },
+      changeTabs(e){
+        const list = this.data.list
+        const currentTab = e.currentTarget.dataset.id
+
+        if (this.data.translate) return
+
+        list.forEach((item) => {
+          item.activeTab = false
+        })
+
+        list[currentTab].activeTab = true
+
+        this.list = list
+        this.currentTab = currentTab
+      },
+      tapAdd(){
+          this.translate = !this.translate
+      },
+    }
+
+    events = {
+      'hiddenTab': (...args) => {
+        this.tabHidden = false
+      },
+      'showTab': (...args) => {
+        this.tabHidden = true
+      },
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>

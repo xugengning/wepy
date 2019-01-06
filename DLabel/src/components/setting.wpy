@@ -1,0 +1,274 @@
+<style lang="less">
+  .setting {
+  height: 1100rpx;
+  background-color: #f1f1f1;
+}
+
+.setting .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 104rpx;
+  border-bottom: 2rpx solid #ccc;
+  padding: 0 24rpx 0 32rpx;
+  background-color: #fff;
+}
+
+.setting .item .right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.setting .item .right image {
+  width: 28rpx;
+  height: 28rpx;
+  vertical-align: middle;
+}
+
+.setting .item .right text {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.setting .item .right .symbol {
+  width: 236rpx;
+  height: 68rpx;
+  border: 2rpx solid #0497ff;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 10rpx;
+}
+
+.setting .item .right .symbol text {
+  font-size: 40rpx;
+  color: #0497ff;
+  margin: 0;
+  width: 100%;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+}
+
+.setting .item .right .symbol .add {
+  border-left: 1rpx solid #0497ff;
+}
+
+.highSetting {
+  padding: 0 32rpx;
+  font-size: 24rpx;
+  color: #929292;
+  height: 52rpx;
+  line-height: 52rpx;
+  background-color: #f1f1f1;
+}
+
+.show {
+  justify-content: center;
+  border-bottom: 0;
+}
+
+.show text {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.setting .item .right .choose {
+  width: 372rpx;
+  height: 68rpx;
+  border: 2rpx solid #0497ff;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.setting .item .right .choose .text {
+  width: 100%;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  border-left: 1rpx solid #0497ff;
+  margin: 0;
+  font-size: 32rpx;
+  color: #0497FF;
+}
+
+.setting .item .right .choose .active {
+  background-color: #0497ff;
+  color: #fff;
+}
+
+.setting .item .right .choose .text:first-child {
+  border-left: 0;
+}
+</style>
+<template>
+<view class='setting'>
+  <navigator class='item' url="/pages/blueTooth">
+    <text>连接状态</text>
+    <view class='right'>
+      <text>未连接设备（点击搜索）</text>
+      <image src='/images/@2x/attribute_rightarrow@2x.png'></image>
+    </view>
+  </navigator>
+  <view class='item'>
+    <text>打印速度</text>
+    <view class='right'>
+      <text>{{printSpeed}}</text>
+      <view class='symbol'>
+        <text class='subtract' data-target='printSpeed' data-add="0" @tap="changeNumber">-</text>
+        <text class='add' data-target='printSpeed' data-add="1" @tap="changeNumber">+</text>
+      </view>
+    </view>
+  </view>
+  <view class='item'>
+    <text>打印浓度</text>
+    <view class='right'>
+      <text>{{printConcentration}}</text>
+      <view class='symbol'>
+        <text class='subtract' data-target='printConcentration' data-add="0" @tap="changeNumber">-</text>
+        <text class='add' data-target='printConcentration' data-add="1" @tap="changeNumber">+</text>
+      </view>
+    </view>
+  </view>
+  <navigator class='item' url="/pages/language">
+    <text>界面语言</text>
+    <view class='right'>
+      <text>简体中文</text>
+      <image src='/images/@2x/attribute_rightarrow@2x.png'></image>
+    </view>
+  </navigator>
+  <view class='highSetting'>高级设置（非专业人士不建议更改）</view>
+  <view class='item show' wx:if="{{showHighSetting}}" @tap="clickShow"><text>点击展开</text></view>
+  <view wx:else>
+    <view class='item'>
+      <text>反转打印</text>
+      <view class='right'>
+        <view class="body-view">
+          <switch bindchange="switch1Change"/>
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <text>纸张类型</text>
+      <view class='right'>
+        <view class='choose'>
+          <text class="text {{paperType == 1 ? 'active' : ''}}" data-id='1' data-target='paperType' @tap="changeTab">间隙纸</text>
+          <text class="text {{paperType == 2 ? 'active' : ''}}" data-id='2' data-target='paperType' @tap="changeTab">连续纸</text>
+          <text class="text {{paperType == 3 ? 'active' : ''}}" data-id='3' data-target='paperType' @tap="changeTab">黑标纸</text>
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <text>送纸偏移</text>
+      <view class='right'>
+        <text>{{paperOffset}}毫米</text>
+        <view class='symbol'>
+          <text class='subtract' data-target='paperOffset' data-add="0" @tap="changeNumber">-</text>
+          <text class='add' data-target='paperOffset' data-add="1" @tap="changeNumber">+</text>
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <text>裁切选项</text>
+      <view class='right'>
+        <view class="body-view">
+          <switch bindchange="switch1Change"/>
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <text>剥离模式</text>
+      <view class='right'>
+        <view class="body-view">
+          <switch bindchange="switch1Change"/>
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <text>蜂鸣器</text>
+      <view class='right'>
+        <view class='choose'>
+          <text class="text {{buzzer == 1 ? 'active' : ''}}" data-id='1' data-target='buzzer' @tap="changeTab">关闭</text>
+          <text class="text {{buzzer == 2 ? 'active' : ''}}" data-id='2' data-target='buzzer' @tap="changeTab">打印前</text>
+          <text class="text {{buzzer == 3 ? 'active' : ''}}" data-id='3' data-target='buzzer' @tap="changeTab">打印后</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import { INCREMENT, DECREMENT } from '../store/types/counter'
+  import { asyncInc } from '../store/actions'
+  import util from '../utils/util.js'
+
+  @connect({
+    stateNum (state) {
+      return state.counter.num
+    },
+    asyncNum (state) {
+      return state.counter.asyncNum
+    }
+  }, {
+    incNum: INCREMENT,
+    decNum: DECREMENT,
+    asyncInc
+  })
+
+  export default class Counter extends wepy.component {
+    data = {
+      printSpeed: 1,
+      printConcentration: 10,
+      paperOffset: 2,
+      showHighSetting: false,
+      activeTab: 1,
+      paperType: 1,
+      buzzer: 1
+    }
+    events = {
+      'index-broadcast': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    methods = {
+      changeNumber(e) {
+        const target = e.currentTarget.dataset.target
+        const add = e.currentTarget.dataset.add
+        let value;
+        if (add == 1) {
+          value = this.data[target] + 1
+        } else {
+          if (!this.data[target]) return
+          value = this.data[target] - 1
+        }
+
+        this.setData({
+          [target]: value
+        })
+      },
+      clickShow(){
+        this.setData({
+          showHighSetting: true
+        })
+      },
+      changeTab(e){
+        const target = e.currentTarget.dataset.target
+        const id = e.currentTarget.dataset.id
+        this.setData({
+          [target]: id
+        })
+      }
+    }
+  }
+</script>

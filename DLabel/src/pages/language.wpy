@@ -1,0 +1,89 @@
+<style lang="less">
+ .language {
+  height: 1210rpx;
+  background-color: #f7f7f7;
+}
+
+.language .radio {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  height: 104rpx;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ccc;
+  padding: 0 24rpx 0 32rpx;
+}
+
+.language .default {
+  margin-bottom: 22rpx;
+  border-bottom: 0;
+}
+</style>
+<template>
+  <radio-group class="language" bindchange="radioChange">
+    <label class="radio {{item.name == 0 ? 'default' : ''}}" wx:for="{{items}}">
+      <text>{{item.value}}</text>
+      <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}"/>
+    </label>
+  </radio-group>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '界面语言'
+    }
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {
+      items: [
+        { name: '0', value: '系统默认', checked: 'true' },
+        { name: '1', value: '简体中文' },
+        { name: '2', value: '簡體中文' },
+        { name: '3', value: 'English' }
+      ]
+    }
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {
+       radioChange: function (e) {
+        console.log('radio发生change事件，携带value值为：', e.detail.value)
+      },
+    }
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad(options) {}
+  }
+</script>

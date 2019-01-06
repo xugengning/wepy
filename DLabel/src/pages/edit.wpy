@@ -1,0 +1,3453 @@
+<style lang="less">
+  .edit {
+  background-color: #f7f7f7;
+  position: relative;
+}
+
+.draw {
+  height: 652rpx;
+  width: 710rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.operation {
+  display: flex;
+  flex-direction: column;
+  z-index: 10000;
+  transition: all 0.2s;
+  transform: translateY(0)
+}
+
+.operation .tab {
+  padding-right: 54rpx;
+  height: 90rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #ebebeb;
+  position: relative;
+  border: 4rpx solid #ebebeb;
+}
+
+.operation .tab .img {
+  position: absolute;
+  width: 46rpx;
+  height: 46rpx;
+  right: 20rpx;
+}
+
+.operation .tab text {
+  display: block;
+  color: #666;
+  height: 86rpx;
+  line-height: 86rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.operation .tab .active {
+  color: #0497FF;
+  border-bottom: 4rpx solid #0497FF;
+}
+
+.operation .content {
+  background-color: #fff;
+  height: 424rpx;
+  overflow-y: scroll;
+}
+
+.operation .content .items{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30rpx;
+  height: 140rpx;
+}
+
+.operation .content .items .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.operation .content .items .item image {
+  height: 60rpx;
+  width: 60rpx;
+}
+
+.operation .content .items .item text {
+  color: #666;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+
+.operation .content .tip {
+  width: 48rpx;
+  height: 48rpx;
+  position: fixed;
+  right: 30rpx;
+  bottom: 20rpx;
+}
+
+.operation .content .row {
+  display: flex;
+  justify-content: flex-start;
+  height: 104rpx;
+  line-height: 104rpx;
+  border-bottom: 2rpx solid #ebebeb;
+}
+
+.operation .content .row .title {
+  color: #9a9a9a;
+  font-size: 28rpx;
+  margin: 0 40rpx;
+}
+
+.operation .content .row .choose text {
+  display: inline-block;
+  color: #333;
+  font-size: 28rpx;
+  margin-right: 50rpx;
+  height: 104rpx;
+  line-height: 104rpx;
+}
+
+.operation .content .tab4 .column .row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.operation .content .tab4 .column .row text {
+  margin-right: 0;
+}
+
+.operation .content .tab4 .column .row image {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.radio-group {
+  width: 700rpx;
+  height: 68rpx;
+  border: 2rpx solid #0497ff;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.radio-group .radio{
+  width: 100%;
+  height: 72rpx;
+  line-height: 70rpx;
+  text-align: center;
+  border-left: 1rpx solid #0497ff;
+  margin: 0;
+  color: #0497FF;
+}
+
+.radio-group .radio .text {
+  font-size: 28rpx;
+}
+
+.radio-group .active {
+  background-color: #0497ff;
+  color: #fff;
+}
+
+.radio-group .radio:first-child {
+  border-left: 0;
+}
+
+.operation .content .tab3 {
+  background-color: #f7f7f7;
+}
+
+.operation .content .tab3 .item {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  padding: 0 24rpx 0 40rpx;
+}
+
+.operation .content .tab3 .item .title {
+  color: #9A9A9A;
+  font-size: 28rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.operation .content .tab3 .item .val {
+  display: flex;
+  height: 104rpx;
+  border-bottom: 2rpx solid #ccc;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.operation .content .tab3 .item .val:last-child {
+  border-bottom: 0;
+}
+
+.operation .content .tab3 .item .val .rightarrow {
+  width: 28rpx;
+  height: 28rpx;
+  vertical-align: middle;
+}
+
+.operation .content .tab3 .item .val .right text{
+  color: #666;
+}
+
+.operation .content .tab3 .item .val .right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.operation .content .tab3 .item .val .right image {
+  width: 28rpx;
+  height: 28rpx;
+  vertical-align: middle;
+}
+
+.operation .content .tab3 .item .val .right text {
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.operation .content .tab3 .item .val .right .symbol {
+  width: 236rpx;
+  height: 68rpx;
+  border: 2rpx solid #0497ff;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 10rpx;
+}
+
+ .operation .content .tab3 .item .val .right .symbol text {
+  font-size: 40rpx;
+  color: #0497ff;
+  margin: 0;
+  width: 100%;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+}
+
+.operation .content .tab3 .item .val .right .symbol .add {
+  border-left: 1rpx solid #0497ff;
+}
+
+.draw .item {
+  position: absolute;
+  border: 4rpx solid transparent;
+}
+
+.draw .item .lock {
+  height: 48rpx;
+  width: 48rpx;
+  position: absolute;
+  top: 10rpx;
+  left: 10rpx;
+}
+
+.draw .border {
+  border: 4rpx dashed #0497FF;
+}
+
+.draw .border .rightImg,.bottomImg{
+  height: 48rpx;
+  width: 48rpx;
+  position: absolute;
+}
+
+.draw .border .rightImg {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.draw .border .bottomImg {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%)
+}
+
+.draw .item .barnum {
+  text-align: center;
+}
+
+.mark {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  width: 100%;
+  height: 514rpx;
+  background-color: #fff;
+}
+
+.mark .header {
+  height: 90rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #ebebeb;
+}
+
+.mark .header .img {
+  width: 38rpx;
+  height: 38rpx;
+  position: absolute;
+  left: 20rpx;
+}
+
+.mark .contents {
+  height: 424rpx;
+  overflow-y: scroll;
+  background-color: #f7f7f7;
+}
+
+.mark .contents .content{
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+
+.mark .contents .content .title {
+  height: 80rpx;
+  font-size: 28rpx;
+  color: #666;
+  border-bottom: 2rpx solid #ebebeb;
+  line-height: 80rpx;
+  padding-left: 20rpx;
+}
+
+.mark .contents .content .sign {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx 0;
+}
+
+.mark .contents .content .sign text{
+  font-size: 50rpx;
+}
+
+.mark .coin {
+  height: 424rpx;
+  overflow-y: scroll;
+  background-color: #f7f7f7;
+}
+
+.mark .coin .line {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  padding: 10rpx 0;
+}
+
+.mark .coin .line text {
+  font-size: 50rpx;
+}
+
+.contentInput {
+  background-color: #F2F2F2;
+  width: 100%;
+  height: 88rpx;
+  position: absolute;
+  bottom: -100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.contentInput .img {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.contentInput .ipt {
+  width: 560rpx;
+  height: 68rpx;
+  background-color: #fff;
+  padding-left: 20rpx;
+  font-size: 28rpx;
+}
+
+.contentInput .text {
+  color: #666666;
+  font-size: 34rpx;
+}
+
+.mark .list {
+  background-color: #fff;
+}
+
+.mark .list .item {
+  height: 104rpx;
+  line-height: 104rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #101010;
+}
+
+.mark .list .title {
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #9A9A9A;
+}
+
+.mark .list .line {
+  background-color: #eee;
+  height: 10rpx;
+}
+
+.turn {
+  position: absolute;
+  bottom: 0;
+  height: 66rpx;
+  width: 100%;
+}
+
+.turn .left,.right .img {
+  width: 46rpx;
+  height: 66rpx;
+}
+
+.turn .left {
+  position: absolute;
+  left: 0;
+}
+
+.turn .right {
+  position: absolute;
+  right: 0;
+}
+
+.contentTranslate {
+  transition: all 0.2s;
+  transform: translateY(424rpx)
+}
+
+
+</style>
+<template>
+  <view class='edit'>
+    <view class='draw'>
+      <view :class='{item:true, border: item.choose }' wx:for="{{codeData}}" wx:key="*this" hidden='{{item.hidden}}' bindtouchstart='touchStart' bindtouchmove='onTouchMove' bindtouchend='touchEnd' @tap='onshowline' data-index='{{index}}' style='left:{{item.left}}rpx;top:{{item.top}}rpx;z-index:{{item.zIndex}};'>
+        <view class='barnum' wx:if="{{item.type == 'barcode' && item.barcodeAligh == 'top'}}">{{item.value}}</view>
+        <canvas id='{{item.name}}' canvas-id='{{item.name}}' style='width:{{item.width}}rpx;height:{{item.height}}rpx;'></canvas>
+        <view class='barnum' wx:if="{{item.type == 'barcode' && item.barcodeAligh == 'bottom'}}">{{item.value}}</view>
+        <image class='lock' wx:if="{{item.locked}}" src='../images/@2x/tabbar_icon_label_selected@2x.png'></image>
+        <image wx:if="{{item.choose}}" class='rightImg' data-index='{{index}}' catchtouchstart='getWidthTarget' catchtouchmove='changeWidth'  src='../images/@2x/tabbar_icon_label_selected@2x.png'></image>
+        <image wx:if="{{item.choose}}" hidden="{{item.type != 'barcode' && item.type != 'line' && item.type != 'qrcode' && item.type != 'rect' && item.type != 'image' }}" class='bottomImg' data-index='{{index}}' catchtouchmove='changeHeight' catchtouchstart='getHeightTarget' src='../images/@2x/tabbar_icon_label_selected@2x.png'></image>
+      </view>
+    </view>
+
+
+    <view :class='{operation: true, contentTranslate: !hideContent }' wx:if="{{operation}}">
+    <!-- tab -->
+    <view class='tab'>
+      <text class="{{currentTab == 0 ? 'active' : ''}}" data-id='0' @tap='changeTab'>文件</text>
+      <text class="{{currentTab == 1 ? 'active' : ''}}" data-id='1' @tap='changeTab'>插入</text>
+      <text class="{{currentTab == 2 ? 'active' : ''}}" data-id='2' @tap='changeTab'>属性</text>
+      <text class="{{currentTab == 3 ? 'active' : ''}}" data-id='3' @tap='changeTab'>操作</text>
+      <image class='img' src='../images/@2x/edit_icon_slide@2x.png' @tap='hideContent'></image>
+    </view>
+    <!-- tab -->
+    <view class='content'>
+    <!-- 文件 -->
+      <view wx:if="{{currentTab == 0}}">
+        <view class='items'>
+          <navigator class='item' url='/pages/tipSetting'>
+            <image src='../images/@2x/edit_icon_new@2x.png'></image>
+            <text>新建</text>
+          </navigator>
+          <navigator class='item' url='/pages/nav'>
+            <image src='../images/@2x/edit_icon_open@2x.png'></image>
+            <text>打开</text>
+          </navigator>
+          <view class='item' @tap='saveData'>
+            <image src='../images/@2x/edit_icon_save@2x.png'></image>
+            <text>保存</text>
+          </view>
+          <view class='item' @tap='saveDataAs'>
+            <image src='../images/@2x/edit_icon_save@2x.png'></image>
+            <text>另存为</text>
+          </view>
+          <view class='item' @tap='drawCanvas'>
+            <image src='../images/@2x/edit_icon_image@2x.png'></image>
+            <text>存为图片</text>
+          </view>
+        </view>
+        <view class='items'>
+          <navigator class='item' url='/pages/print'>
+            <image src='../images/@2x/edit_icon_print@2x.png'></image>
+            <text>打印</text>
+          </navigator>
+          <view class='item' @tap='removeAll'>
+            <image src='../images/@2x/edit_icon_delete@2x.png'></image>
+            <text>清空</text>
+          </view>
+          <navigator class='item' url='/pages/fileManage'>
+            <image src='../images/@2x/edit_icon_database@2x.png'></image>
+            <text>Excel导入</text>
+          </navigator>
+          <view class='item'>
+          </view>
+          <view class='item'>
+          </view>
+        </view>
+      </view>
+      <!-- 插入 -->
+      <view wx:if="{{currentTab == 1}}" class='tab2'>
+        <view class='grid' wx:if="{{isGrid}}">
+          <view class='items'>
+            <view class='item' @tap='drawText'>
+              <image src='../images/@2x/edit_icon_text@2x.png'></image>
+              <text>文本</text>
+            </view>
+            <view class='item' @tap='getBarCode'>
+              <image src='../images/@2x/edit_icon_barcode@2x.png'></image>
+              <text>条形码</text>
+            </view>
+            <view class='item' @tap='getQRCode'>
+              <image src='../images/@2x/edit_icon_orcode@2x.png'></image>
+              <text>二维码</text>
+            </view>
+            <view class='item' @tap='drawLine'>
+              <image src='../images/@2x/edit_icon_line@2x.png'></image>
+              <text>线条</text>
+            </view>
+            <view class='item' @tap='drawRect'>
+              <image src='../images/@2x/edit_icon_shape@2x.png'></image>
+              <text>矩形</text>
+            </view>
+          </view>
+          <view class='items'>
+            <view class='item' @tap='drawDate'>
+              <image src='../images/@2x/edit_icon_time@2x.png'></image>
+              <text>日期时间</text>
+            </view>
+            <view class='item' @tap='changeMark'>
+              <image src='../images/@2x/edit_icon_logo@2x.png'></image>
+              <text>标志</text>
+            </view>
+            <view class='item' @tap='chooseImage'>
+              <image src='../images/@2x/edit_icon_image@2x.png'></image>
+              <text>图片</text>
+            </view>
+            <view class='item'>
+              <image src='../images/@2x/edit_icon_form@2x.png'></image>
+              <text>表格</text>
+            </view>
+            <view class='item'>
+            </view>
+          </view>
+        </view>
+        <view class='column' wx:else>
+          <view class='row'>
+            <text class='title'>文本</text>
+            <view class='choose'>
+              <text @tap='drawText'>固定内容</text>
+              <text @tap='changeCoin'>货币符号</text>
+              <text @tap='drawDate'>日期时间</text>
+              <text @tap='openScan'>扫描</text>
+            </view>
+          </view>
+          <view class='row'>
+            <text class='title'>一维</text>
+            <view class='choose'>
+              <text @tap='getBarCode' data-code='CODE128'>CODE128</text>
+              <text @tap='getBarCode' data-code='CODE39'>CODE39</text>
+              <text @tap='getBarCode' data-code='EAN13'>EAN13</text>
+              <text @tap='getBarCode' data-code='EAN8'>EAN8</text>
+            </view>
+          </view>
+          <view class='row'>
+            <text class='title'>二维</text>
+            <view class='choose'>
+              <text @tap='getQRCode'>QRCODE</text>
+              <text @tap='drawDatamatrix'>DATAMATRIX</text>
+              <text>PDF417</text>
+            </view>
+          </view>
+          <view class='row'>
+            <text class='title'>图形</text>
+            <view class='choose'>
+              <text @tap='drawLine'>线条</text>
+              <text @tap='drawRect'>矩形</text>
+              <text>表格</text>
+              <text @tap='changeMark'>更多标志</text>
+            </view>
+          </view>
+        </view>
+        <image wx:if="{{isGrid}}" class='tip' src='../images/@2x/insert_Palace@2x.png' @tap='changeGrid'></image>
+        <image wx:else class='tip' src='../images/@2x/insert_profession@2x.png' @tap='changeGrid'></image>
+      </view>
+      <!-- 属性 -->
+      <view wx:if="{{currentTab == 2}}" class='tab3'>
+        <view class='item' wx:if="{{targetItem.type == 'text' || targetItem.type == 'barcode' || targetItem.type == 'qrcode'}}">
+          <view class='title'>文本属性</view>
+          <view class='val'>
+            <radio-group class="radio-group" @change="radioChange">
+              <label :class="{radio: true, active: item.checked}" wx:for="{{items}}" wx:key="*this">
+                <text class="text">{{item.value}}</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+          <view class='val' wx:if="{{items[3].checked}}" @tap='changeWordChoose'>
+            <text class='text'>资产名称</text>
+            <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+          </view>
+          <view class='val' @tap='changeContentInput'>
+            <text class='text'>当前内容</text>
+            <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+          </view>
+        </view>
+        <view class='item' wx:if="{{targetItem.type == 'rect'}}">
+          <view class='title'>矩形</view>
+          <view class='val'>
+            <text class='text'>矩形形状</text>
+            <radio-group class="radio-group" style="width:488rpx;" @change="rectAngle">
+              <label class="radio {{item.checked ? 'active' : ''}}" wx:for="{{rectItems}}" wx:key="*this">
+                <text class="text">{{item.value}}</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+          <view class='val'>
+            <text class='text'>内部填充</text>
+            <switch color="#0497FF" @change="changeFill"/>
+          </view>
+          <navigator class='val' url=''>
+            <text class='text'>矩形长度</text>
+            <view class='right'>
+              <text>{{targetItem.height / 20}}毫米</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </navigator>
+          <navigator class='val' url=''>
+            <text class='text'>矩形宽度</text>
+            <view class='right'>
+              <text>{{targetItem.width / 20}}毫米</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </navigator>
+          <view class='val'>
+            <text class='text'>线条宽度</text>
+            <view class='right'>
+              <text>{{rectLine}}毫米</text>
+              <view class='symbol'>
+                <text class='subtract' data-target='rectLine' data-add="0" @tap="changeRectLine">-</text>
+                <text class='add' data-target='rectLine' data-add="1" @tap="changeRectLine">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='item' wx:if="{{targetItem.type == 'line'}}">
+          <view class='title'>线条</view>
+          <view class='val'>
+            <text class='text'>线条样式</text>
+            <radio-group class="radio-group" style="width:488rpx;" @change="lineType">
+              <label class="radio {{item.checked ? 'active' : ''}}" wx:for="{{lineItems}}" wx:key="*this">
+                <text class="text">{{item.value}}</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+          <navigator class='val' url=''>
+            <text class='text'>线条长度</text>
+            <view class='right'>
+              <text>{{targetItem.width / 20}}毫米</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </navigator>
+          <view class='val'>
+            <text class='text'>线条宽度</text>
+            <view class='right'>
+              <text>{{rectLine}}毫米</text>
+              <view class='symbol'>
+                <text class='subtract' data-target='rectLine' data-add="0" @tap="changeRectLine">-</text>
+                <text class='add' data-target='rectLine' data-add="1" @tap="changeRectLine">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='item' wx:if="{{targetItem.type == 'qrcode'}}">
+          <view class='title'>二维码</view>
+          <view class='val'>
+            <text class='text'>空白区域</text>
+            <radio-group class="radio-group" style="width:488rpx;" @change="changeSpace">
+              <label class="radio {{item.checked ? 'active' : ''}}" wx:for="{{spaceItems}}" wx:key="*this">
+                <text class="text">{{item.value}}</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+          <view class='val'>
+            <text class='text'>纠错级别</text>
+            <radio-group class="radio-group" style="width:488rpx;" @change="changeError">
+              <label class="radio {{item.checked ? 'active' : ''}}" wx:for="{{errorItems}}" wx:key="*this">
+                <text class="text">{{item.value}}</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+        </view>
+        <view class='item' wx:if="{{targetItem.type == 'barcode'}}">
+          <view class='title'>一维码</view>
+          <view class='val' @tap='changeCodeType'>
+            <text class='text'>编码模式</text>
+            <view class='right'>
+              <text>{{targetItem.codeType}}</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </view>
+          <view class='val'>
+            <text class='text'>水平对齐</text>
+            <radio-group class="radio-group" style="width:488rpx;" @change="barcodeAligh">
+              <label class="radio {{item.checked ? 'active' : ''}}" wx:for="{{barcodeItems}}" wx:key="*this">
+                <text class="text">{{item.value}}</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+        </view>
+        <view class='item' wx:if="{{items[1].checked}}">
+          <view class='title'>计数器</view>
+          <view class='val' data-target='frontWord' @tap='changeFeword'>
+            <text class='text'>前缀</text>
+            <view class='right'>
+              <text>{{targetItem.frontWord || "空"}}</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </view>
+          <view class='val' data-target='endWord' @tap='changeFeword'>
+            <text class='text'>后缀</text>
+            <view class='right'>
+              <text>{{targetItem.endWord || "空"}}</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </view>
+          <view class='val'>
+            <text class='text'>递变量</text>
+            <view class='right'>
+              <text>{{zeroNum}}{{passValue}}</text>
+              <view class='symbol'>
+                <text class='subtract' data-target='passValue' data-add="0" @tap="changeNumber">-</text>
+                <text class='add' data-target='passValue' data-add="1" @tap="changeNumber">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='item' wx:if="{{items[2].checked}}">
+          <view class='title'>日期时间</view>
+          <view class='val'>
+            <text class='text'>日期格式</text>
+            <view class='right'>
+              <text>{{dateFormat[dateIndex]}}</text>
+              <view class='symbol'>
+                <!--<text class='subtract' data-target='dateIndex' data-items='dateFormat' data-add="0" @tap="changeDate">{{"<"}}</text>-->
+                <text class='add' data-target='dateIndex' data-items='dateFormat' data-add="1" @tap="changeDate">{{">"}}</text>
+              </view>
+            </view>
+          </view>
+          <view class='val'>
+            <text class='text'>时间格式</text>
+            <view class='right'>
+              <text>{{timeFormat[timeIndex]}}</text>
+              <view class='symbol'>
+                <!--<text class='subtract' data-target='timeIndex' data-add="0" data-items='timeFormat' @tap="changeDate">{{"<"}}</text>-->
+                <text class='add' data-target='timeIndex' data-add="1" data-items='timeFormat' @tap="changeDate">{{">"}}</text>
+              </view>
+            </view>
+          </view>
+          <view class='val'>
+            <text class='text'>日期偏移</text>
+            <view class='right'>
+              <text>{{dateOffset >= 0 ? "+" : ""}}{{dateOffset}}天</text>
+              <view class='symbol'>
+                <text class='subtract' data-target='dateOffset' data-add="0" @tap="changeOffset">-</text>
+                <text class='add' data-target='dateOffset' data-add="1" @tap="changeOffset">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='item' wx:if="{{items[3].checked}}">
+          <view class='title'>Excel表格</view>
+          <view class='val'>
+            <text class='text'>Excel管理</text>
+            <view class='right'>
+              <text>条码机管理</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </view>
+        </view>
+        <view class='item'>
+          <view class='title'>字体体号</view>
+          <navigator class='val' url='/pages/fontManage'>
+            <text class='text'>当前内容</text>
+            <view class='right'>
+              <text>系统文字</text>
+              <image class='rightarrow' src='../images/@2x/attribute_rightarrow@2x.png'></image>
+            </view>
+          </navigator>
+          <view class='val'>
+            <text class='text'>字号</text>
+            <view class='right'>
+              <text>{{fontSize[fontIndex].name}}</text>
+              <view class='symbol'>
+                <text class='subtract' data-target='fontIndex' data-add="1" @tap="changeFont">-</text>
+                <text class='add' data-target='fontIndex' data-add="0" @tap="changeFont">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='item'>
+          <view class='title'>图形设计</view>
+          <view class='val'>
+            <text class='text'>行间距</text>
+            <view class='right'>
+              <text>{{lineSpacing}}倍</text>
+              <view class='symbol'>
+                <text class='subtract' data-target='lineSpacing' data-add="0" @tap="changeLineSpace">-</text>
+                <text class='add' data-target='lineSpacing' data-add="1" @tap="changeLineSpace">+</text>
+              </view>
+            </view>
+          </view>
+          <view class='val'>
+            <text class='text'>字符间距</text>
+            <view class='right'>
+              <text>{{wordSpacing}}毫米</text>
+              <view class='symbol'>
+                <text class='subtract' data-target='wordSpacing' data-add="0" @tap="changeWordSpacing">-</text>
+                <text class='add' data-target='wordSpacing' data-add="1" @tap="changeWordSpacing">+</text>
+              </view>
+            </view>
+          </view>
+          <view class='val'>
+            <text class='text'>水平对齐</text>
+            <radio-group class="radio-group" style="width:488rpx;" data-target="" @change="textAlign">
+              <label class="radio {{item.checked ? 'active' : ''}}" wx:for="{{alignItems}}" wx:key="*this">
+                <text class="text">{{item.value}}</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+          <view class='val'>
+            <text class='text'>粗体</text>
+            <switch color="#0497FF" @change="changeFontWeight"/>
+          </view>
+          <view class='val'>
+            <text class='text'>斜体</text>
+            <switch color="#0497FF" @change="changeItalic"/>
+          </view>
+          <view class='val'>
+            <text class='text'>下划线</text>
+            <switch color="#0497FF" @change="changeUnderline"/>
+          </view>
+          <view class='val'>
+            <text class='text'>删除线</text>
+            <switch color="#0497FF" @change="changeDeleteline"/>
+          </view>
+          <view class='val'>
+            <text class='text'>横排竖排</text>
+            <switch color="#0497FF" @change="toColumn"/>
+          </view>
+          <view class='val'>
+            <text class='text'>黑底白字</text>
+            <switch color="#0497FF" @change="blackWhite"/>
+          </view>
+          <view class='val'>
+            <text class='text'>旋转角度</text>
+            <radio-group class="radio-group" style="width:488rpx;" @change="rotate">
+              <label class="radio {{item.checked ? 'active' : ''}}" wx:for="{{rotateItems}}" wx:key="*this">
+                <text class="text">{{item.value}}°</text>
+                <radio value="{{item.name}}" color="#0497FF" checked="{{item.checked}}" hidden='true'/>
+              </label>
+            </radio-group>
+          </view>
+          <view class='val'>
+            <text class='text'>位置锁定</text>
+            <switch color="#0497FF" @change="lock"/>
+          </view>
+        </view>
+      </view>
+      <!-- 操作 -->
+      <view wx:if="{{currentTab == 3}}" class='tab4'>
+        <view class='column'>
+          <view class='row'>
+            <text @tap='revocation'>撤销</text>
+            <text @tap='recover'>恢复</text>
+            <text @tap='copy'>拷贝</text>
+            <text @tap='remove'>删除</text>
+            <text @tap='lock'>锁定</text>
+            <text @tap='multiple'>多选</text>
+          </view>
+          <view class='row'>
+            <image src='../images/@2x/edit_icon_enlarge@2x.png' @tap='enlarge'></image>
+            <image src='../images/@2x/edit_icon_narrow@2x.png' @tap='narrow'></image>
+            <image src='../images/@2x/edit_icon_rotate@2x.png' @tap='rotate'></image>
+            <image src='../images/@2x/edit_icon_left@2x.png' @tap='go' data-direction='left'></image>
+            <image src='../images/@2x/edit_icon_right@2x.png' @tap='go' data-direction='right'></image>
+            <image src='../images/@2x/edit_icon_up@2x.png' @tap='go' data-direction='up'></image>
+            <image src='../images/@2x/edit_icon_down@2x.png' @tap='go' data-direction='down'></image>
+          </view>
+          <view class='row'>
+            <image src='../images/@2x/edit_icon_leftalignment@2x.png' @tap='alignLeft'></image>
+            <image src='../images/@2x/edit_icon_centered@2x.png' @tap='alignCenter'></image>
+            <image src='../images/@2x/edit_icon_rightalignment@2x.png' @tap='alignRight'></image>
+            <image src='../images/@2x/edit_icon_Verticalcenter@2x.png' @tap='verticalcenter'></image>
+            <image src='../images/@2x/edit_icon_horizontally@2x.png' @tap='alignCenter'></image>
+            <image src='../images/@2x/edit_icon_textleft@2x.png' @tap='textAlign' data-align='left'></image>
+            <image src='../images/@2x/edit_icon_textcentered@2x.png' @tap='textAlign' data-align='center'></image>
+            <image src='../images/@2x/edit_icon_textright@2x.png' @tap='textAlign' data-align='right'></image>
+          </view>
+          <view class='row'>
+            <text @tap='moveUp'>上移一层</text>
+            <text @tap='moveDown'>下移一层</text>
+            <text @tap='moveTop'>置于顶层</text>
+            <text @tap='moveBottom'>置于底层</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+    <view class='mark' hidden='{{!markshow}}'>
+    <view class='header'>
+      <image class='img' src='/images/@2x/insert_return@2x.png' @tap='changeMark'></image>
+      <text>标志</text>
+    </view>
+    <view class='contents'>
+      <view class='content'>
+        <view class='title'>最近使用</view>
+        <view class='sign'>
+          <text wx:for="{{markData}}" wx:key="*this" data-value='{{item}}' @tap='drawMark'>{{item}}</text>
+        </view>
+      </view>
+      <view class='content'>
+        <view class='title'>通用标志</view>
+        <view class='sign'>
+          <text wx:for="{{markData}}" wx:key="*this" data-value='{{item}}' @tap='drawMark'>{{item}}</text>
+        </view>
+        <view class='sign'>
+          <text wx:for="{{markData}}" wx:key="*this" data-value='{{item}}' @tap='drawMark'>{{item}}</text>
+        </view>
+      </view>
+      <view class='content'>
+        <view class='title'>零售标志</view>
+        <view class='sign'>
+          <text wx:for="{{markData}}" wx:key="*this" data-value='{{item}}' @tap='drawMark'>{{item}}</text>
+        </view>
+        <view class='sign'>
+          <text wx:for="{{markData}}" wx:key="*this" data-value='{{item}}' @tap='drawMark'>{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+    <view class='mark' hidden='{{!coinshow}}'>
+      <view class='header'>
+        <image class='img' src='/images/@2x/insert_return@2x.png' @tap='changeCoin'></image>
+        <text>货币符号</text>
+      </view>
+      <view class='coin'>
+        <view class='line'>
+          <text wx:for="{{coinData}}" wx:key="*this" data-value='{{item}}' @tap='drawMark'>{{item}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='mark' hidden='{{!wordChoose}}'>
+      <view class='header'>
+        <image class='img' src='/images/@2x/insert_return@2x.png' @tap='changeWordChoose'></image>
+        <text>字段选择</text>
+      </view>
+      <view class='list coin'>
+        <view class='item' wx:for="{{wordChooseItems}}" wx:key="*this">{{item}}</view>
+      </view>
+    </view>
+    <view class='mark' hidden='{{!codeType}}'>
+      <view class='header'>
+        <image class='img' src='/images/@2x/insert_return@2x.png' @tap='changeCodeType'></image>
+        <text>编码模式</text>
+      </view>
+      <view class='list coin'>
+        <view wx:for="{{codeTypeItems}}" wx:key="*this">
+          <view class='line' wx:if="{{item.name == '其他条码'}}"></view>
+          <view class='item title'>{{item.name}}</view>
+          <view class='item' wx:for="{{item.list}}" wx:for-item="j" wx:key="*this" @tap='changeCodeType' data-value='{{j}}'>{{j}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='contentInput' wx:if='{{contentInput}}'>
+      <image class='img' src='/images/@2x/insert_return@2x.png' @tap='changeCoin'></image>
+      <input class='ipt' type='text' value="{{targetItem.value}}" adjust-position="false" placeholder='输入内容' focus="true" cursor-spacing='0' bindinput='changeValue' bindfocus="getKeyHeight"></input>
+      <view @tap='changeContentInput'>确定</view>
+    </view>
+    <view class='contentInput' wx:if='{{feword}}'>
+    <image class='img' src='/images/@2x/insert_return@2x.png' @tap='changeFeword'></image>
+    <input class='ipt' type='text' value="{{feValue}}" adjust-position="false" placeholder='输入内容' focus="true" cursor-spacing='0' bindinput='changefeValue' bindfocus="getKeyHeight"></input>
+    <view @tap='changeFeword'>确定</view>
+  </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+  require('../utils/JsBarcode.all.js');
+  const wxbarcode = require('../utils/wxbarcode.js');
+  const util = require('../utils/util.js');
+  const data = []
+  const JsBarcode = global.JsBarcode
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '编辑'
+    }
+    components = {
+    }
+
+    mixins = [testMixin]
+
+    data = {
+      width: 0,
+      height: 0,
+    isHide: true,
+    hideContent: true,
+    canvasHide: true,
+    currentTab: 1,
+    isGrid: false,
+    items: [
+      {
+        name: '0',
+        value: '固定内容',
+        checked: 'true'
+      },
+      {
+        name: '1',
+        value: '序列号'
+      },
+      {
+        name: '2',
+        value: '时间日期'
+      },
+      {
+        name: '3',
+        value: 'Excel表格'
+      }
+    ],
+    errorItems: [
+      {
+      name: '0',
+      value: '低',
+      checked: 'true',
+      type: 'low'
+    },
+    {
+      name: '1',
+      value: '中',
+      type: 'middle'
+    },
+    {
+      name: '2',
+      value: '高',
+      type: 'high'
+    },
+    {
+      name: '3',
+      value: '强',
+      type: 'strong'
+    }
+    ],
+    spaceItems: [
+      {
+      name: '0',
+      value: '0',
+      checked: 'true',
+      type: '0'
+    },
+      {
+        name: '1',
+        value: '2',
+        type: '2'
+      },
+      {
+        name: '2',
+        value: '4',
+        type: '4'
+      }
+    ],
+    alignItems: [
+      {
+      name: '0',
+      value: '居左',
+      checked: 'true',
+      type: 'left'
+    },
+    {
+      name: '1',
+      value: '居中',
+      type: 'center'
+    },
+    {
+      name: '2',
+      value: '居右',
+      type: 'right'
+    },
+    {
+      name: '3',
+      value: '拉伸',
+      type: 'tensile'
+    }
+    ],
+    lineItems: [
+      {
+      name: '0',
+      value: '实线',
+      checked: 'true',
+      type: 'solid'
+    },
+    {
+      name: '1',
+      value: '虚线',
+      type: 'dashed'
+    }
+    ],
+    barcodeItems:[
+        {
+        name: '0',
+        value: '条码下方',
+        checked: 'true',
+        type: 'bottom'
+      },
+      {
+        name: '1',
+        value: '条码上方',
+        type: 'top'
+      },
+      {
+        name: '2',
+        value: '无文字',
+        type: 'none'
+      }
+    ],
+    rectItems: [
+      {
+      name: '0',
+      value: '直角',
+      checked: 'true',
+      type: 'rightAngle'
+    },
+    {
+      name: '1',
+      value: '圆角',
+      type: 'roundAngle'
+    },
+    {
+      name: '2',
+      value: '椭圆',
+      type: 'ellipse'
+    },
+    {
+      name: '3',
+      value: '圆',
+      type: 'round'
+    }
+    ],
+    rotateItems: [
+      {
+        name: '0',
+        value: 0,
+        checked: 'true'
+      },
+      {
+        name: '1',
+        value: 90
+      },
+      {
+        name: '2',
+        value: 180
+      },
+      {
+        name: '3',
+        value: 270
+      }
+    ],
+    fontSize: [
+      {
+        name: "初号",
+        value: 56
+      },
+      {
+        name: "小初",
+        value: 48
+      },
+      {
+        name: "一号",
+        value: 34
+      },
+      {
+        name: "小一",
+        value: 32
+      },
+      {
+        name: "二号",
+        value: 29
+      },
+      {
+        name: "小二",
+        value: 24
+      },
+      {
+        name: "三号",
+        value: 21
+      },
+      {
+        name: "小三",
+        value: 20
+      },
+      {
+        name: "四号",
+        value: 18
+      },
+      {
+        name: "小四",
+        value: 16
+      },
+      {
+        name: "五号",
+        value: 14
+      },
+      {
+        name: "小五",
+        value: 12
+      },
+      {
+        name: "六号",
+        value: 10
+      },
+      {
+        name: "小六",
+        value: 8
+      },
+      {
+        name: "七号",
+        value: 7
+      },
+      {
+        name: "八号",
+        value: 6
+      },
+      {
+        name: "5",
+        value: 7
+      },
+      {
+        name: "5.5",
+        value: 8
+      },
+      {
+        name: "6.5",
+        value: 9
+      },
+      {
+        name: "7.5",
+        value: 10
+      },
+      {
+        name: "8",
+        value: 11
+      },
+      {
+        name: "9",
+        value: 12
+      },
+      {
+        name: "10",
+        value: 13
+      },
+      {
+        name: "10.5",
+        value: 14
+      },
+      {
+        name: "11",
+        value: 15
+      },
+      {
+        name: "12",
+        value: 16
+      },
+      {
+        name: "14",
+        value: 19
+      },
+      {
+        name: "16",
+        value: 22
+      },
+      {
+        name: "18",
+        value: 24
+      },
+      {
+        name: "20",
+        value: 26
+      },
+      {
+        name: "24",
+        value: 32
+      },
+      {
+        name: "26",
+        value: 35
+      },
+      {
+        name: "28",
+        value: 37
+      },
+      {
+        name: "36",
+        value: 48
+      },
+      {
+        name: "48",
+        value: 64
+      },
+      {
+        name: "72",
+        value: 96
+      }
+    ],
+    fontIndex: 10,
+    lineSpacing: 1,
+    wordSpacing: 0.0,
+    passValue: 1,
+    dateOffset: 0,
+    dateFormat: [
+      '无',
+      'yyyy年mm月dd日',
+      'yyyy年mm',
+      'mm月dd日',
+      'yyyy - mm - dd',
+      'yyyy - mm',
+      'mm - dd',
+      'yyyy / mm / dd',
+      'yyyy / mm',
+      'mm / dd',
+      'mm - dd - yyyy',
+      'dd - mm - yyyy'
+    ],
+    timeFormat: [
+      '无',
+      'hh: mm: ss',
+      'hh: mm',
+      'mm: ss'
+    ],
+    timeIndex: 0,
+    dateIndex: 1,
+    codeData: [],
+    targetItem: {},
+    markData: ['@', '★', '♀', '√', '☺', '☏'],
+    coinData: ['￥', '$', '￡', '￠', 'Σ'],
+    markshow: false,
+    coinshow: false,
+    contentInput: false,
+    wordChoose: false,
+    codeType: false,
+    operation: true,
+    globalData: [],
+    globalIndex: 0,
+    textAbout: ["text", "date", "mark"],
+    wordChooseItems: ["资产编码", "资产名称", "部门负责人", "使用部门", "存放地点", "价格", "检查"],
+    frontWord: "",
+    endWord: "",
+    feword: false,
+    feValue: "",
+    feTarget: "",
+    rightDisabled: false,
+    zeroNum: "",
+    rectLine: 0.5,
+    codeType: false,
+    codeTypeItems: [
+      {
+        name: "通用条码", list: ["CODE-128", "CODE-39", "ITF-25"]
+      },
+      {
+        name: "商品码", list: ["EAN-13", "EAN-8", "UPC-A", "UPC-E", "ISBN"]
+      },
+      {
+        name: "其他条码", list: ["CODABAR", "CODE-93", "ECODE-39", "ITF-14", "CHINA POST", "MATRIX-25", "INDUSTRIAL-25"]
+      },]
+    }
+
+    touchStartTime = 0
+    touchStartX = 0
+    touchStartY = 0
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      changeCodeType(e){
+        const value = e.currentTarget.dataset.value
+        const {
+          codeData,
+          targetItem,
+          globalData,
+        } = this
+
+        if (value) {
+          let targetValue = codeData[targetItem.index]
+          targetValue.codeType = value.split("-").join("")
+
+          globalData.push(codeData)
+
+          this.methods.updateCanvas(targetValue)
+
+          this.globalData = globalData
+          this.codeData = codeData
+          this.globalIndex = globalData.length - 1
+          this.targetItem = targetValue
+        }
+
+        this.codeType = !this.codeType
+      },
+
+      changeFeword(e) {
+        const {
+          codeData,
+          targetItem,
+          globalData
+        } = this
+
+        if (!targetItem.name) return
+
+        if (targetItem.locked) return
+
+        globalData.push(codeData)
+
+        this.globalData = globalData
+        this.feword = !this.feword
+        this.feTarget = e.currentTarget.dataset.target || ""
+        this.targetItem = codeData[targetItem.index]
+        this.operation = !this.operation
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+      },
+
+      changefeValue(e) {
+        const {
+          feTarget,
+          codeData,
+          targetItem,
+        } = this
+
+        codeData[targetItem.index][feTarget] = e.detail.value
+
+        this.codeData = codeData
+      },
+
+      changeMark() {
+        this.markshow = !this.markshow
+      },
+
+      changeWordChoose() {
+        this.wordChoose = !this.wordChoose
+      },
+
+      changeContentInput() {
+        const {
+          codeData,
+          targetItem,
+          globalData
+        } = this
+
+        if (!targetItem.name) return
+
+        if (targetItem.locked) return
+
+        globalData.push(codeData)
+
+        this.operation = !this.operation
+        this.contentInput = !this.contentInput
+        this.globalData = globalData
+        this.methods.getPassValue(codeData[targetItem.index])
+        this.methods.updateCanvas(codeData[targetItem.index])
+      },
+
+      changeValue(e) {
+        const targetItem = this.targetItem
+        const codeData = this.codeData
+
+        codeData[targetItem.index].value = e.detail.value
+
+        this.codeData = codeData
+        this.targetItem = codeData[targetItem.index]
+
+      },
+
+      changeCoin() {
+        this.coinshow = !this.coinshow
+      },
+
+      changeDate(e) {
+        const target = e.currentTarget.dataset.target
+        const items = e.currentTarget.dataset.items
+        const add = e.currentTarget.dataset.add
+        let dateIndex = this[target]
+
+        if (add == '1') {
+          dateIndex++
+        } else {
+          dateIndex--
+        }
+
+        if (dateIndex == this[items].length) {
+          dateIndex = 0
+        }
+
+        if (dateIndex < 0) {
+          dateIndex = this[items].length - 1
+        }
+
+        this[target] = dateIndex
+
+        const {
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+
+        if (!targetItem.name) return
+
+        if (targetItem.type == "date") {
+
+          let value = util.formatDate(new Date(), this.methods.dateFormat[this.dateIndex])
+
+          value += " " + util.formatDate(new Date(), this.methods.timeFormat[this.timeIndex])
+
+          codeData[index].value = value
+
+          this.methods.updateCanvas(codeData[index])
+        }
+
+        this.codeData = codeData
+        this.targetItem = codeData[index]
+      },
+
+      changeRectLine(e) {
+        const target = e.currentTarget.dataset.target
+        const add = e.currentTarget.dataset.add
+        let {
+          codeData,
+          targetItem,
+          globalData,
+          globalIndex,
+          zeroNum
+        } = this
+        let targetValue = codeData[targetItem.index]
+        let value;
+        if (add == 1) {
+          value = this[target] + 0.5
+
+        } else {
+          if (!this[target]) return
+
+          value = this[target] - 0.5
+        }
+
+        targetValue.lineWidth = value
+
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(targetValue)
+
+        this[target] = value
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      changeNumber(e) {
+        const target = e.currentTarget.dataset.target
+        const add = e.currentTarget.dataset.add
+        let {
+          codeData,
+          targetItem,
+          globalData,
+          globalIndex,
+          zeroNum
+        } = this
+        let targetValue = codeData[targetItem.index]
+        let value;
+        if (add == 1) {
+          value = this[target] + 1
+
+        } else {
+          if (!this[target]) return
+
+          value = this[target] - 1
+        }
+
+        let reg = /\d+/g
+        let num = reg.exec(targetValue.value)[0]
+        let textValue = targetValue.value.replace(num, "")
+
+        targetValue.value = textValue + zeroNum + value
+
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(targetValue)
+
+        this[target] = value
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      changeOffset(e) {
+        const target = e.currentTarget.dataset.target
+        const add = e.currentTarget.dataset.add
+        const {
+          codeData,
+          targetItem
+        } = this
+        const index = targetItem.index
+
+        if (!targetItem.name) return
+
+        let value;
+        if (add == 1) {
+          value = this[target] + 1
+        } else {
+          value = this[target] - 1
+        }
+
+        if (targetItem.type == "date") {
+
+          let str = util.formatDate(new Date(new Date().getTime() + value * 86400000), this.methods.dateFormat[this.dateIndex])
+
+          str += " " + util.formatDate(new Date(), this.methods.timeFormat[this.timeIndex])
+
+          codeData[index].value = str
+
+          this.methods.updateCanvas(codeData[index])
+        }
+
+        this[target] = value
+        this.codeData = codeData
+        this.targetItem = codeData[index]
+      },
+
+      changeFill(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        codeData[targetItem.index].fill = e.detail.value
+
+        globalData.push(codeData)
+
+        console.log(codeData[targetItem.index])
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length
+      },
+
+      changeFontWeight(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+
+        codeData[targetItem.index].fontWeight = e.detail.value
+
+        globalData.push(codeData)
+
+        console.log(codeData[targetItem.index])
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length
+      },
+
+      changeItalic(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        codeData[targetItem.index].italic = e.detail.value
+
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length
+      },
+
+      blackWhite(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        codeData[targetItem.index].blackWhite = e.detail.value
+
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length
+      },
+
+      toColumn(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        codeData[targetItem.index].column = e.detail.value
+
+        let width = codeData[targetItem.index].width
+        let height = codeData[targetItem.index].height
+        codeData[targetItem.index].width = height
+        codeData[targetItem.index].height = width
+
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length
+      },
+
+      changeUnderline(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        codeData[targetItem.index].underline = e.detail.value
+
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length
+      },
+
+      changeDeleteline(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        codeData[targetItem.index].deleteline = e.detail.value
+
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length
+      },
+
+      changeLineSpace(e) {
+        const target = e.currentTarget.dataset.target
+        const add = e.currentTarget.dataset.add
+        const index = this[target]
+        const targetItem = this.targetItem
+        const codeData = this.codeData
+
+        if (!targetItem.name) return
+
+        let value;
+        if (add == 1) {
+          if (this[target] == 6.0) return
+          value = this[target] + 0.25
+        } else {
+          if (this[target] == 0.25) return
+          value = this[target] - 0.25
+        }
+
+        codeData[targetItem.index].lineSpacing = value
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this[target] = value
+        this.codeData = codeData
+      },
+
+      changeWordSpacing(e) {
+        const target = e.currentTarget.dataset.target
+        const add = e.currentTarget.dataset.add
+        const index = this[target]
+        const targetItem = this.targetItem
+        const codeData = this.codeData
+
+        if (!targetItem.name) return
+
+        let value;
+        if (add == 1) {
+          if (this[target] == 20) return
+          value = this[target] - 0 + 0.1
+        } else {
+          if (this[target] == 0) return
+          value = this[target] - 0 - 0.1
+        }
+
+        value = value.toFixed(1)
+
+        codeData[targetItem.index].workSpacing = value
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this[target] = value
+        this.codeData = codeData
+      },
+
+      changeFont(e) {
+        const target = e.currentTarget.dataset.target
+        const add = e.currentTarget.dataset.add
+        const index = this[target]
+        const targetItem = this.targetItem
+        const codeData = this.codeData
+
+        if (!targetItem.name) return
+
+        let value;
+        if (add == 1) {
+          if (index == this.fontSize.length - 1) return
+          value = index + 1
+        } else {
+          if (!index) return
+          value = index - 1
+        }
+
+        if (this.textAbout.indexOf(targetItem.type) != -1) {
+          codeData[targetItem.index].height = this.fontSize[value].value * 2 + 8
+        }
+
+        codeData[targetItem.index].fontSize = this.fontSize[value].value
+
+        this.methods.updateCanvas(codeData[targetItem.index])
+
+        this[target] = value
+        this.codeData = codeData
+      },
+
+      openScan() {
+        let _this = this
+        wx.scanCode({
+          success(res) {
+            console.log(res)
+            switch (res.scanType) {
+              case "QR_CODE":
+
+                break;
+
+            }
+          },
+          fail(res) {
+            console.log(res)
+          }
+        })
+      },
+      radioChange: (e, target) => {
+        const val = e.detail.value
+        let items = this.items
+
+        if (target == undefined) {
+          let items = this.items
+          target = 'items'
+        }
+
+        if (target == "alignItems") {
+          items = this.alignItems
+        }
+
+        if (target == "rotateItems") {
+          items = this.rotateItems
+        }
+
+        if (target == "rectItems") {
+          items = this.rectItems
+        }
+
+        if (target == "lineItems") {
+          items = this.lineItems
+        }
+
+        if (target == "barcodeItems") {
+          items = this.barcodeItems
+        }
+
+        if (target == "errorItems") {
+          items = this.errorItems
+        }
+
+        if (target == "spaceItems") {
+          items = this.spaceItems
+        }
+
+        console.log(items);
+
+        items.forEach((item, index) => {
+          if (item.name == e.detail.value) {
+            item.checked = true
+          } else {
+            item.checked = false
+          }
+        })
+
+        console.log(target);
+        this[target] = items
+      },
+
+      switch1Change: function(e) {
+        console.log('switch1 发生 change 事件，携带值为', e.detail.value)
+      },
+
+      getBarCode(e) {
+        const {
+          codeData,
+          globalData
+        } = this
+
+        const code = e.currentTarget.dataset.code || "CODE128"
+
+        const temp = {
+          value: "123456789",
+          width: 680,
+          height: 200,
+          name: 'barcode' + codeData.length,
+          type: "barcode",
+          left: 0,
+          barcodeAligh: "bottom",
+          codeType: code,
+          top: 0,
+          zIndex: codeData.length,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+
+        globalData.push(codeData)
+
+        const ctx = wx.createCanvasContext(temp.name)
+        this.methods.drawBarcode(ctx, temp)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        ctx.draw();
+      },
+
+      drawBarcode(ctx, temp){
+        JsBarcode("#"+temp.name, temp.value, {
+          format: temp.codeType,
+          ctx,
+          width: temp.width / 2,
+          height: temp.height / 2
+        })
+      },
+
+      drawDatamatrix() {
+        const {
+          codeData,
+          globalData
+        } = this
+        const temp = {
+          value: "123456789",
+          width: 420,
+          height: 420,
+          name: 'qrcode' + codeData.length,
+          type: "qrcode",
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          // 触摸开始时间
+          touchStartTime: 0,
+          // 触摸结束时间
+          touchEndTime: 0,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        const ctx = wx.createCanvasContext(temp.name)
+        thismatrix(ctx);
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        ctx.draw();
+      },
+
+      Datamatrix(ctx){
+        const a = [
+          "01010101010101010100",
+          "01011011100010110010",
+          "01110000011011011000",
+          "01101111011110000110",
+          "01100011110100011000",
+          "01111001000000010010",
+          "01000010100101000000",
+          "01100110101110011110",
+          "01001001110000001000",
+          "01010100100010111110",
+          "01110011101111110100",
+          "01110011100101110110",
+          "01010111001000011100",
+          "01100000111001001010",
+          "01101001010111010000",
+          "01000111101101101110",
+          "01001100110110001000",
+          "01111111111111111110",
+          "00000000000000000000"
+          ]
+
+          for(let i = 0; i < a.length ; i++) {
+            for (let j = 0; j < a[i].length-1; j++) {
+              if(a[i][j] == "0") {
+                ctx.setFillStyle('black')
+              } else {
+                ctx.setFillStyle('white')
+              }
+              ctx.fillRect(j*4, i*4, 4, 4)
+            }
+          }
+      },
+
+      getQRCode(val) {
+        const {
+          codeData,
+          globalData
+        } = this
+
+        const temp = {
+          value: val.result || "123456789",
+          width: 420,
+          height: 420,
+          name: 'qrcode' + codeData.length,
+          type: "qrcode",
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          // 触摸开始时间
+          touchStartTime: 0,
+          // 触摸结束时间
+          touchEndTime: 0,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        const ctx = wx.createCanvasContext(temp.name)
+
+        wxbarcode.qrcode(ctx, temp.value, temp.width, temp.height);
+
+        ctx.draw()
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+
+      },
+
+      drawText() {
+        const {
+          codeData,
+          globalData
+        } = this
+        const temp = {
+          value: "请输入文本内容012",
+          width: 400,
+          height: 36,
+          name: 'text' + codeData.length,
+          type: "text",
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(temp)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+
+      },
+
+      drawLine() {
+        const {
+          codeData,
+          globalData
+        } = this
+        const temp = {
+          value: "请输入文本内容",
+          width: 400,
+          height: 50,
+          name: 'line' + codeData.length,
+          type: "line",
+          lineWidth: 0.5,
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(temp)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      lineCanvas(ctx, temp) {
+        ctx.setLineWidth(temp.lineWidth * 10)
+        if (temp.line == "dashed") {
+          ctx.setLineDash([5, 5], 0);
+        } else {
+          ctx.setLineDash([0, 0], 0);
+        }
+        ctx.moveTo(0, temp.height / 4)
+        ctx.lineTo(temp.width / 2, temp.height / 4)
+        ctx.stroke();
+      },
+
+      drawRect() {
+        const {
+          codeData,
+          globalData
+        } = this
+        const temp = {
+          value: "",
+          width: 400,
+          height: 400,
+          name: 'rect' + codeData.length,
+          type: "rect",
+          lineWidth: 0.5,
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(temp)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      rectCanvas(ctx, temp) {
+        const lineWidth = temp.lineWidth * 10
+
+        ctx.setLineWidth(lineWidth)
+
+        if (temp.angle == "rightAngle" || temp.angle == undefined) {
+          ctx.rect(lineWidth / 2, lineWidth / 2, temp.width / 2 - lineWidth, temp.height / 2 - lineWidth)
+        }
+
+        if (temp.angle == "roundAngle") {
+          this.drawUsingArc({
+            x: lineWidth / 2,
+            y: lineWidth / 2,
+            width: temp.width / 2 - lineWidth,
+            height: temp.height / 2 - lineWidth
+          }, 10, ctx)
+        }
+
+        if (temp.angle == "ellipse") {
+          this.ParamEllipse(ctx, temp.width / 4, temp.height / 4, temp.width / 4 - lineWidth / 2, temp.height / 4 - lineWidth / 2)
+        }
+
+        if (temp.angle == "round") {
+          ctx.arc(temp.width / 4, temp.height / 4, temp.height / 4 - lineWidth / 2, 0, 2 * Math.PI)
+        }
+
+        if (temp.fill) {
+          ctx.fill()
+        } else {
+          ctx.stroke()
+        }
+      },
+
+      ParamEllipse(context, x, y, a, b) {
+        //max是等于1除以长轴值a和b中的较大者
+        //i每次循环增加1/max，表示度数的增加
+        //这样可以使得每次循环所绘制的路径（弧线）接近1像素
+        var step = (a > b) ? 1 / a : 1 / b;
+        context.beginPath();
+        context.moveTo(x + a, y); //从椭圆的左端点开始绘制
+        for (var i = 0; i < 2 * Math.PI; i += step) {
+          //参数方程为x = a * cos(i), y = b * sin(i)，
+          //参数为i，表示度数（弧度）
+          context.lineTo(x + a * Math.cos(i), y + b * Math.sin(i));
+        }
+        context.closePath();
+        context.stroke();
+      },
+
+      drawUsingArc(rect, r, ctx) {
+
+        ctx.moveTo(rect.x + r, rect.y);
+        ctx.lineTo(rect.x + rect.width - r, rect.y);
+        ctx.arc(rect.x + rect.width - r, rect.y + r, r, Math.PI / 180 * 270, 0, false);
+        ctx.lineTo(rect.x + rect.width, rect.y + rect.height - r);
+        ctx.arc(rect.x + rect.width - r, rect.y + rect.height - r, r, 0, Math.PI / 180 * 90, 0, false);
+        ctx.lineTo(rect.x + r, rect.y + rect.height);
+        ctx.arc(rect.x + r, rect.y + rect.height - r, r, Math.PI / 180 * 90, Math.PI / 180 * 180, false);
+        ctx.lineTo(rect.x, rect.y + r);
+        ctx.arc(rect.x + r, rect.y + r, r, Math.PI / 180 * 180, Math.PI / 180 * 270, false);
+
+        ctx.stroke();
+      },
+
+      drawImage:(imgUrl, options) => {
+        const {
+          codeData,
+          globalData
+        } = this
+
+        while (options.width >= 355 || options.height >= 326) {
+          options.height = options.height / 2
+          options.width = options.width / 2
+        }
+
+        console.log(1);
+        const temp = {
+          value: imgUrl,
+          width: options.width * 2,
+          height: options.height * 2,
+          name: 'image' + codeData.length,
+          type: "image",
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(temp)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      imageCanvas(ctx, temp) {
+        ctx.drawImage(temp.value, 0, 0, temp.width / 2, temp.height / 2)
+      },
+
+      drawMark(e) {
+        const {
+          codeData,
+          globalData
+        } = this
+        const value = e.currentTarget.dataset.value
+        const temp = {
+          value,
+          width: 50,
+          height: 50,
+          name: 'mark' + codeData.length,
+          type: "mark",
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(temp)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      drawDate() {
+        const {
+          codeData,
+          globalData,
+          dateFormat,
+          dateIndex
+        } = this
+
+        const temp = {
+          value: util.formatDate(new Date(), dateFormat[dateIndex]),
+          width: 600,
+          height: 50,
+          name: 'date' + codeData.length,
+          type: "date",
+          left: 0,
+          top: 0,
+          zIndex: codeData.length,
+          index: codeData.length
+        }
+
+        codeData.push(temp)
+        globalData.push(codeData)
+
+        this.methods.updateCanvas(temp)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      textCanvas(ctx, temp) {
+        const fz = temp.fontSize || 14
+        let str = (temp.frontWord || "") + temp.value + (temp.endWord || "")
+        const textWidth = ctx.measureText(str).width
+        let x = 0
+        let bet = temp.workSpacing * 20 || 0
+        let fontValue = `${fz}px sans-serif`
+
+        if (temp.textAlign == 'right') {
+          x = temp.width / 2 - textWidth
+        }
+
+        if (temp.textAlign == 'center') {
+          x = (temp.width / 2 - textWidth) / 2
+        }
+
+        if (temp.fontWeight) {
+          fontValue = "bold " + fontValue
+        }
+
+        if (temp.italic) {
+          fontValue = "italic " + fontValue
+        }
+
+        ctx.font = fontValue
+
+        if (temp.blackWhite) {
+          ctx.setFillStyle('black')
+          ctx.fillRect(0, 0, temp.width, temp.height)
+          ctx.setFillStyle('white')
+        }
+
+        if (temp.column) {
+          for (let i = 0; i < str.length; i++) {
+            ctx.fillText(str[i], x, fz * (i + 1))
+          }
+        } else {
+          if (temp.textAlign == 'tensile') {
+            bet = (temp.width / 2 - textWidth) / (str.length - 1)
+          }
+
+          let wordWidth = 0;
+
+          for (let i = 0; i < str.length; i++) {
+            if (i > 0) {
+              wordWidth += ctx.measureText(str[i - 1]).width
+            }
+
+            ctx.fillText(str[i], x + bet * i + wordWidth, fz)
+          }
+        }
+
+        if (temp.underline) {
+          ctx.moveTo(x, fz + 4)
+          ctx.lineTo(x + textWidth, fz + 4)
+        }
+
+        if (temp.deleteline) {
+          ctx.moveTo(x, fz / 2 + 2)
+          ctx.lineTo(x + textWidth, fz / 2 + 2)
+        }
+
+        ctx.stroke()
+      },
+
+      chooseImage() {
+        const that = this;
+        wx.chooseImage({
+          success: function(res) {
+            wx.getImageInfo({
+              src: res.tempFilePaths[0],
+              success(options) {
+                console.log(options)
+                that.methods.drawImage(res.tempFilePaths[0], options)
+              }
+            })
+          },
+          fail(err) {
+            console.log(err)
+          }
+        })
+      },
+
+      getKeyHeight(e) {
+        console.log(e)
+        const {
+          value,
+          height
+        } = e.detail
+      },
+
+      drawCanvas() {
+        const codeData = this.codeData
+        const ctx = wx.createCanvasContext('canvas')
+        const that = this
+
+        const tempData = codeData.sort((a, b) => {
+          return a.zIndex - b.zIndex
+        })
+
+        for (let i = 0; i < tempData.length; i++) {
+          let data = tempData[i]
+          switch (data.type) {
+            case 'barcode':
+              wxbarcode.barcode(ctx, data.value, data.width, data.height);
+              continue;
+            case 'qrcode':
+              wxbarcode.qrcode(ctx, data.value, data.width, data.height);
+              continue;
+            case 'text':
+              this.textCanvas(ctx, data)
+              continue;
+            case 'line':
+              this.methods.lineCanvas(ctx, data)
+              continue;
+            case 'rect':
+              this.methods.rectCanvas(ctx, data)
+              continue;
+            case 'date':
+              this.textCanvas(ctx, data)
+              continue;
+            case 'mark':
+              this.textCanvas(ctx, data)
+              continue;
+            case 'image':
+              this.methods.imageCanvas(ctx, data)
+              continue;
+          }
+        }
+
+        ctx.draw(false, setTimeout(()=> {
+          that.saveAsPic(ctx.canvasId)
+        }, 1000))
+      },
+
+      saveAsPic(canvasId) {
+
+        this.canvasHide = false
+
+        wx.canvasToTempFilePath({
+          canvasId,
+          fileType: 'jpg',
+          success: function(res) {
+            console.log(res.tempFilePath)
+            wx.saveImageToPhotosAlbum({
+              filePath: res.tempFilePath,
+              success(res) {
+                console.log(res)
+              },
+              fail(res) {
+                console.log(res)
+              },
+            })
+          },
+          fail(err){
+            console.log(222)
+            console.log(err)
+          }
+        })
+      },
+
+      revocation() {
+        const {
+          globalData,
+          globalIndex,
+          codeData
+        } = this
+
+        let index = globalIndex - 1
+        let target = globalData[index]
+
+        if (globalIndex <= 0) {
+          index = -1
+          target = []
+        }
+
+        if (codeData.length > target.length) {
+          for (let i = 0; i < target.length; i++) {
+            codeData[i].hidden = !!target[i].hidden
+          }
+
+          for (let i = target.length; i < codeData.length; i++) {
+            codeData[i].hidden = true
+          }
+
+          globalData[index] = codeData
+        }
+
+        this.methods.updateAllCanvas(globalData[index])
+
+        this.codeData = globalData[index]
+        this.globalData = globalData
+        this.globalIndex = index
+      },
+
+      recover() {
+        const {
+          globalData,
+          globalIndex
+        } = this
+
+        const index = globalIndex + 1
+        const length = globalData.length
+
+        if (length == index) return
+
+        this.methods.updateAllCanvas(globalData[index])
+
+        this.codeData = globalData[index]
+        this.globalIndex = index
+      },
+
+      updateAllCanvas(data) {
+        if (!data.length) return
+
+        data.forEach((item) => {
+          this.methods.updateCanvas(item)
+        })
+      },
+
+      lock(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+
+        codeData[index].locked = e.detail.value || !codeData[index].locked
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1,
+        this.targetItem = codeData[index]
+
+      },
+
+      copy() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+        let temp = {}
+
+        for (let k in codeData[index]) {
+          temp[k] = codeData[index][k]
+        }
+
+        codeData.push(temp)
+
+        const target = codeData[codeData.length - 1]
+
+        target.index = codeData.length - 1
+        target.name = target.type + (codeData.length - 1)
+        target.left += 10
+        target.top += 10
+        target.choose = false
+        this.methods.updateCanvas(target)
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1,
+        this.targetItem = codeData[index]
+      },
+
+      remove() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        codeData[targetItem.index].hidden = true
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+
+      },
+
+      moveUp() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+        let zIndex = targetItem.zIndex
+
+        if (targetItem.locked) return
+
+        const targetArr = codeData.filter((item) => item.zIndex > zIndex).sort((a, b) => {
+          return a.zIndex - b.zIndex
+        })
+
+        if (!targetArr.length) return
+        console.log(targetArr)
+
+        codeData[index].zIndex = codeData[targetArr[0].index].zIndex
+        codeData[targetArr[0].index].zIndex = zIndex
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      moveDown() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+        let zIndex = targetItem.zIndex
+
+        if (targetItem.locked) return
+
+        const targetArr = codeData.filter((item) => item.zIndex < zIndex).sort((a, b) => {
+          return b.zIndex - a.zIndex
+        })
+
+        if (!targetArr.length) return
+
+        codeData[index].zIndex = codeData[targetArr[0].index].zIndex
+        codeData[targetArr[0].index].zIndex = zIndex
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+
+      },
+
+      moveTop() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+        let zIndex = targetItem.zIndex
+
+        if (targetItem.locked) return
+
+        const targetArr = codeData.filter((item) => item.zIndex > zIndex).sort((a, b) => {
+          return b.zIndex - a.zIndex
+        })
+
+        console.log(targetArr)
+
+        if (!targetArr.length) return
+
+        codeData[index].zIndex = codeData[targetArr[0].index].zIndex
+        codeData[targetArr[0].index].zIndex = zIndex
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+
+      },
+
+      moveBottom() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+        let zIndex = targetItem.zIndex
+
+        if (targetItem.locked) return
+
+        const targetArr = codeData.filter((item) => item.zIndex < zIndex).sort((a, b) => {
+          return a.zIndex - b.zIndex
+        })
+
+        if (!targetArr.length) return
+
+        codeData[index].zIndex = codeData[targetArr[0].index].zIndex
+        codeData[targetArr[0].index].zIndex = zIndex
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+
+      },
+
+      verticalcenter() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        let index = targetItem.index
+
+        if (targetItem.locked) return
+
+        codeData[index].top = (652 - targetItem.height - 8) / 2
+        codeData[index].verticalcenter = true
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      go(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        const direction = e.currentTarget.dataset.direction
+        const index = targetItem.index
+        const maxWidth = 710 - codeData[index].width - 8
+        const maxHeight = 710 - codeData[index].height - 8
+
+        switch (direction) {
+          case 'left':
+            codeData[index].left -= 10
+            if (codeData[index].left <= 0) codeData[index].left = 0
+            break;
+          case 'right':
+            codeData[index].left += 10
+            if (codeData[index].left >= maxWidth) codeData[index].left = maxWidth
+            break;
+          case 'up':
+            codeData[index].top -= 10
+            if (codeData[index].top <= 0) codeData[index].top = 0
+            break;
+          case 'down':
+            codeData[index].top += 10
+            if (codeData[index].top >= maxHeight) codeData[index].top = maxHeight
+            break;
+        }
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      rotate(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        const index = targetItem.index
+        const rotate = codeData[index].rotate || 0
+
+        codeData[index].rotate = (rotate + 90) % 360
+
+        if (e.detail.value) {
+          codeData[index].rotate = this.rotateItems[e.detail.value].value
+        }
+
+        this.methods.radioChange(e, "rotateItems")
+        this.targetItem = codeData[index]
+        this.methods.updateCanvas(this.targetItem)
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      enlarge() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        const index = targetItem.index
+
+        if (codeData[index].width >= 710 || codeData[index].height >= 652) return
+
+        codeData[index].width += 50
+        codeData[index].height += 50
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      narrow() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        const index = targetItem.index
+
+        if (codeData[index].width <= 120 || codeData[index].height <= 120) return
+
+        codeData[index].width -= 50
+        codeData[index].height -= 50
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      alignLeft() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        let index = targetItem.index
+
+        codeData[index].left = 0
+        codeData[index].align = 'left'
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      alignRight() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        let index = targetItem.index
+
+        codeData[index].left = 710 - codeData[index].width - 8
+        codeData[index].align = 'right'
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      alignCenter() {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        let index = targetItem.index
+
+        codeData[index].left = (710 - codeData[index].width - 8) / 2
+        codeData[index].align = 'center'
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      rectAngle(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        this.methods.radioChange(e, "rectItems")
+
+        const angle = this.rectItems[e.detail.value].type
+
+        let index = targetItem.index
+
+        codeData[index].angle = angle
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      barcodeAligh(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        this.methods.radioChange(e, "barcodeItems")
+
+        const barcodeAligh = this.barcodeItems[e.detail.value].type
+
+        let index = targetItem.index
+
+        codeData[index].barcodeAligh = barcodeAligh
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      changeSpace(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        this.methods.radioChange(e, "spaceItems")
+
+        const space = this.spaceItems[e.detail.value].type
+
+        let index = targetItem.index
+
+        codeData[index].space = space
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      changeError(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        this.methods.radioChange(e, "errorItems")
+
+        const error = this.errorItems[e.detail.value].type
+
+        let index = targetItem.index
+
+        codeData[index].error = error
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      textAlign(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        this.methods.radioChange(e, "alignItems")
+
+        const align = e.currentTarget.dataset.align || this.alignItems[e.detail.value].type
+
+        let index = targetItem.index
+
+        codeData[index].textAlign = align
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      lineType(e) {
+        const {
+          globalData,
+          globalIndex,
+          codeData,
+          targetItem
+        } = this
+
+        if (targetItem.locked) return
+
+        if (!targetItem.name) return
+
+        this.methods.radioChange(e, "lineItems")
+
+        const line = this.lineItems[e.detail.value].type
+
+        let index = targetItem.index
+
+        codeData[index].line = line
+
+        this.methods.updateCanvas(codeData[index])
+
+        globalData.push(codeData)
+
+        this.codeData = codeData
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+        this.targetItem = codeData[index]
+      },
+
+      /// 按钮触摸开始触发的事件
+      touchStart: function(e) {
+        console.log(e)
+        this.touchStartTime = e.timeStamp
+        this.touchStartX = e.touches[0].clientX
+        this.touchStartY = e.touches[0].clientY
+      },
+
+      /// 按钮触摸结束触发的事件
+      touchEnd: function(e) {
+        const {
+          globalData,
+          codeData
+        } = this
+
+        this.touchEndTime = e.timeStamp
+
+        globalData.push(codeData)
+
+        this.globalData = globalData
+        this.globalIndex = globalData.length - 1
+      },
+
+      onshowline(e) {
+        const index = e.currentTarget.dataset.index
+        const codeData = this.codeData
+
+        codeData.forEach((item) => {
+          item.choose = false
+        })
+
+        codeData[index].choose = true
+        let data = this.codeData[index]
+
+        if (data.type == "text") {
+          this.methods.getPassValue(data)
+        }
+
+        this.codeData = codeData
+        this.targetItem = data
+      },
+
+      getPassValue(data) {
+        let reg = /\d+/g
+        let num = reg.exec(data.value)[0]
+        let zeroNum = "";
+        let temp = data.value.replace(num, "")
+
+        while (num[0] == 0) {
+          zeroNum += "0"
+          num = num.slice(1)
+        }
+
+        this.zeroNum = zeroNum
+        this.passValue = num - 0
+
+        return temp
+      },
+
+      changeWidth(e) {
+        const index = e.currentTarget.dataset.index
+        const codeData = this.codeData
+        const targetItem = this.targetItem
+        const widthBetween = e.changedTouches[0].clientX - this.width;
+
+        if (targetItem.locked) return
+
+        this.width = e.changedTouches[0].clientX
+        codeData[index].width += widthBetween * 2
+        this.methods.updateCanvas(codeData[index])
+
+        this.codeData = codeData
+        this.targetItem = codeData[index]
+      },
+
+      changeHeight(e) {
+        const index = e.currentTarget.dataset.index
+        const codeData = this.codeData
+        const targetItem = this.targetItem
+        const heightBetween = e.changedTouches[0].clientY - this.height;
+
+        if (targetItem.locked) return
+
+        this.height = e.changedTouches[0].clientY
+        codeData[index].height = codeData[index].height + heightBetween
+
+        this.methods.updateCanvas(codeData[index])
+        this.codeData = codeData
+        this.targetItem = codeData[index]
+
+      },
+
+      updateRotates(ctx, data){
+        console.log(data);
+        switch (data.rotate) {
+          case 90:
+            ctx.translate(data.width / 2, 0)
+            ctx.rotate(data.rotate * Math.PI / 180)
+            break
+          case 180:
+            ctx.translate(data.width / 2, data.height / 2)
+            ctx.rotate(data.rotate * Math.PI / 180)
+            break
+          case 270:
+            ctx.translate(0, data.height / 2)
+            ctx.rotate(data.rotate * Math.PI / 180)
+            break
+          default:
+            ctx.translate(0, 0)
+            ctx.rotate(0 * Math.PI / 180)
+        }
+
+      },
+
+      updateCanvas(data) {
+        const ctx = wx.createCanvasContext(data.name)
+        switch (data.type) {
+          case 'barcode':
+            this.methods.drawBarcode(ctx, data)
+            ctx.draw();
+            break;
+          case 'qrcode':
+            this.updateRotates(ctx, data)
+            wxbarcode.qrcode(ctx, data.value, data.width, data.height);
+            ctx.draw();
+            break;
+          case 'text':
+            this.textCanvas(ctx, data)
+            ctx.draw();
+            break;
+          case 'line':
+            this.lineCanvas(ctx, data)
+            ctx.draw();
+            break;
+          case 'rect':
+            this.rectCanvas(ctx, data)
+            ctx.draw();
+            break;
+          case 'date':
+            this.textCanvas(ctx, data)
+            ctx.draw();
+            break;
+          case 'mark':
+            this.textCanvas(ctx, data)
+            ctx.draw();
+            break;
+          case 'image':
+            this.imageCanvas(ctx, data)
+            ctx.draw();
+            break;
+        }
+      },
+
+      getWidthTarget(e) {
+        this.width = e.touches[0].clientX
+        console.log(this.width)
+      },
+
+      getHeightTarget(e) {
+        this.height = e.touches[0].clientY
+      },
+
+      changeTab(e) {
+        const currentTab = e.currentTarget.dataset.id
+
+        this.currentTab = currentTab
+        this.hideContent = true
+      },
+
+      changeGrid() {
+        this.isGrid = !this.isGrid
+      },
+
+      removeAll() {
+        this.codeData = []
+      },
+
+      onTouchMove(e) {
+        const index = e.currentTarget.dataset.index
+        const codeData = this.codeData
+        const target = codeData[index]
+        const targetItem = this.targetItem
+
+        if (targetItem.locked) return
+
+        target.left += (e.changedTouches[0].clientX - this.touchStartX) * 2;
+        target.top += (e.changedTouches[0].clientY - this.touchStartY) * 2;
+
+        if (target.top + target.height >= 652) {
+          target.top = 652 - target.height
+        }
+
+        this.touchStartX = e.changedTouches[0].clientX
+        this.touchStartY = e.changedTouches[0].clientY
+
+        this.codeData = codeData
+        this.targetItem = codeData[index]
+      },
+
+      hideContent() {
+        this.hideContent = !this.hideContent
+      },
+    }
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>

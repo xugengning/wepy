@@ -1,0 +1,107 @@
+<style lang="less">
+  .teach {
+  padding: 0 20rpx;
+  color: #333333;
+}
+
+.teach .item {
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+
+</style>
+<template>
+  <view class='teach'>
+    <navigator class='item' wx:for="{{list}}" wx:key="*this" url='{{item.url}}'>
+      <text>{{item.name}}</text>
+    </navigator>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '视频教程'
+    }
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {
+      list: [
+        {
+        url: "",
+        name: "软件教程",
+        value: ""
+        }, {
+          url: "",
+          name: "Dlabel标签模板使用教程",
+          value: ""
+        }, {
+          url: "",
+          name: "Dlabel编辑功能的操作方法",
+          value: ""
+        },]
+    }
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {}
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad(options) {
+  if (options.id == "1") {
+        wx.setNavigationBarTitle({
+          title: "使用手册"
+        })
+
+        this.setData({
+          list: [
+            {
+              url: "",
+              name: "编辑打印标签",
+              value: ""
+            },
+            {
+              url: "",
+              name: "云文档如何使用",
+              value: ""
+            },
+            {
+              url: "",
+              name: "怎么领取积分",
+              value: ""
+            },
+          ]
+        })
+      }
+    }
+  }
+</script>

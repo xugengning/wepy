@@ -1,0 +1,187 @@
+<style lang="less">
+  .personal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #f7f7f7;
+  box-sizing: border-box;
+}
+
+.items {
+  margin-bottom: 20rpx;
+}
+
+.items .item {
+  height: 104rpx;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  padding: 32rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.items .item .left {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.items .item .right image {
+  width: 48rpx;
+  height: 48rpx;
+  vertical-align: middle;
+}
+
+.items .item .right text {
+  font-size: 24rpx;
+  color: #9a9a9a;
+}
+
+.items .item .right .img {
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+  margin-left: 20rpx;
+}
+
+.btn {
+  box-sizing: border-box;
+  margin: 40rpx;
+}
+</style>
+<template>
+  <view class="personal">
+  <view class='items'>
+    <view class='item'>
+      <text class='left'>头像</text>
+      <view class='right'>
+        <image src='/images/@2x/mine_icon_user_about@2x.png'></image>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='left'>用户名</text>
+      <view class='right'>
+        <text>yonghuming</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='left'>昵称</text>
+      <view class='right'>
+        <text>niceng</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='items'>
+    <view class='item'>
+      <text class='left'>企业名称</text>
+      <view class='right'>
+        <text>未完善</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='left'>企业地址</text>
+      <view class='right'>
+        <text>未完善</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='left'>行业选择</text>
+      <view class='right'>
+        <text>未完善</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='items'>
+    <view class='item'>
+      <text class='left'>收货地址</text>
+      <view class='right'>
+        <text>未完善</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='left'>发票信息</text>
+      <view class='right'>
+        <text>yonghuming</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <text class='left'>我的定制</text>
+      <view class='right'>
+        <text>niceng</text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='items'>
+    <view class='item'>
+      <text class='left'>修改密码</text>
+      <view class='right'>
+        <text></text>
+        <image class='img' src='/images/@2x/attribute_rightarrow@2x.png'></image>
+      </view>
+    </view>
+  </view>
+  <button class='btn' type="warn" size="{{warnSize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}" @tap="warn">
+        <text>退出登录</text>
+        </button>
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {connect} from 'wepy-redux'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  @connect({
+    num(state) {
+      return state.counter.num
+    },
+    asyncNum(state) {
+      return state.counter.asyncNum
+    },
+    sumNum(state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '个人资料'
+    }
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {}
+
+    computed = {
+      now() {
+        return +new Date()
+      }
+    }
+
+    methods = {}
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onLoad(options) {}
+  }
+</script>
